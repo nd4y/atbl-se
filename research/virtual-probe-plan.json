@@ -1,0 +1,73 @@
+[
+  { "method": "GET", "path": "/vacuglide/info" },
+  { "method": "GET", "path": "/vacuglide/state" },
+  { "method": "GET", "path": "/vacuglide/local-script/loaded" },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/target-speed",
+    "body": { "targetSpeed": 15 },
+    "mode": 43,
+    "speed": 15
+  },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/valve/stroke-plus",
+    "body": { "valveState": true },
+    "plus": 1
+  },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/valve/stroke-plus",
+    "body": { "valveState": false },
+    "plus": 0
+  },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/valve/stroke-minus",
+    "body": { "valveState": true },
+    "minus": 1
+  },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/valve/stroke-minus",
+    "body": { "valveState": false },
+    "minus": 0
+  },
+  { "method": "PUT", "path": "/vacuglide/target-speed/stop", "mode": 44 },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/local-script",
+    "body": { "localScriptIndex": 0 },
+    "mode": 41
+  },
+  { "method": "PUT", "path": "/vacuglide/local-script/stop", "mode": 42 },
+  { "method": "PUT", "path": "/vacuglide/local-script/start", "mode": 41 },
+  { "method": "PUT", "path": "/vacuglide/target-speed/stop", "mode": 44 },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/sync-script/upload-funscript",
+    "file": {
+      "actions": [
+        { "at": 0, "pos": 0 },
+        { "at": 1000, "pos": 100 },
+        { "at": 2000, "pos": 0 }
+      ]
+    },
+    "mode": 70
+  },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/sync-script/offset",
+    "body": { "offsetTimeMs": 100 },
+    "offset": 100
+  },
+  { "method": "PUT", "path": "/vacuglide/sync-script/loop", "body": { "loop": true }, "loop": 1 },
+  {
+    "method": "PUT",
+    "path": "/vacuglide/sync-script/start",
+    "body": { "startTimeMs": 0 },
+    "mode": 60
+  },
+  { "method": "PUT", "path": "/vacuglide/sync-script/stop", "mode": 70 },
+  { "method": "PUT", "path": "/vacuglide/target-speed/stop", "mode": 44 }
+]

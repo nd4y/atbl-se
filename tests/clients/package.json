@@ -1,0 +1,8 @@
+{
+  "name": "autoblow-local-client-contracts",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@xsense/autoblow-sdk": "2.6.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "deviceListen": "0.0.0.0:20443",
+  "apiListen": "0.0.0.0:20880",
+  "dnsListen": "",
+  "dnsAnswer": "",
+  "dataDir": "/data",
+  "maxSpeed": 15,
+  "allowShutdown": false,
+  "compatibilityControl": false,
+  "experimentalSyncScripts": false,
+  "experimentalLocalScripts": false,
+  "scriptURLOrigins": []
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "standardVersion": "0.4.0",
+  "kind": "product",
+  "lifecycle": "experiment",
+  "adoption": "adopting",
+  "profiles": ["web", "cli", "service", "network", "integration", "firmware", "docs"],
+  "docs": {
+    "mode": "strict",
+    "readmes": ["README.md", "README.ru.md"],
+    "roots": ["docs/en", "docs/ru"]
+  },
+  "evidence": {
+    "ci": {
+      "status": "NOT_VERIFIED"
+    },
+    "bootstrap": {
+      "status": "NOT_VERIFIED"
+    },
+    "release": {
+      "status": "NOT_VERIFIED"
+    },
+    "runtime": {
+      "status": "NOT_VERIFIED"
+    },
+    "fullHistory": {
+      "status": "NOT_VERIFIED"
+    },
+    "hostingEnforcement": {
+      "status": "NOT_VERIFIED",
+      "reference": "Public visibility and protected main are authorized; configure and read back hosting protection after publishing the named project"
+    },
+    "physical": {
+      "status": "NOT_VERIFIED"
+    }
+  }
+}

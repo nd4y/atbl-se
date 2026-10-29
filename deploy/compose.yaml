@@ -1,0 +1,24 @@
+services:
+  emulator:
+    image: atbl-se:0.2.0-rc.2
+    pull_policy: never
+    restart: "no"
+    init: false
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    user: "65532:65532"
+    stop_grace_period: 12s
+    mem_limit: 96m
+    cpus: 0.5
+    ports:
+      - "20445:20443/tcp"
+      - "20881:20880/tcp"
+    volumes:
+      - "${AUTOBLOW_DATA_DIR:?Set an absolute private data directory}:/data"
+      - "${AUTOBLOW_CONFIG_DIR:?Set an absolute config directory}:/config:ro"
+    healthcheck:
+      test: [CMD, /autoblow-server, --config, /config/server.json, --healthcheck]
+      interval: 30s
+      timeout: 3s
+      retries: 3

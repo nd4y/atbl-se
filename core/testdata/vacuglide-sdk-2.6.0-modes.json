@@ -1,0 +1,20 @@
+{
+  "source": "@xsense/autoblow-sdk2.6.0/src/types.ts:VACUGLIDE_OPPERATIONAL_MODE_MAP",
+  "sdk_archive_sha256": "d3e30038cce16ae63db5e8452f74a4244c6900615fa16fb266e4048bc4afa4f9",
+  "modes": {
+    "41": "LOCAL_SCRIPT_PLAYING",
+    "42": "LOCAL_SCRIPT_PAUSED",
+    "43": "TARGET_SPEED_PLAYING",
+    "44": "TARGET_SPEED_PAUSED",
+    "50": "ONLINE_CONNECTED",
+    "60": "SYNC_SCRIPT_PLAYING",
+    "70": "SYNC_SCRIPT_PAUSED",
+    "130": "SETUP",
+    "140": "LOADING_SETUP",
+    "141": "LOADING_INTERACTIVE",
+    "150": "FIRMWARE_UPDATING",
+    "500": "ERROR",
+    "510": "ERROR_MOTOR_STUCK",
+    "511": "ERROR_MOTOR_OVERRUN"
+  }
+}

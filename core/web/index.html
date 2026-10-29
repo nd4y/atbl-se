@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ATBL-SE</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script defer src="/app.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="badge">ЛОКАЛЬНОЕ УПРАВЛЕНИЕ</span>
+        <h1>ATBL-SE</h1>
+        <p>VacuGlide без облачного сервера</p>
+      </header>
+      <section id="login">
+        <label
+          >Ключ локального управления<input id="token" type="password" autocomplete="off" /></label
+        ><button id="loginButton">Подключиться</button>
+      </section>
+      <section>
+        <div id="connection">Ожидание подключения</div>
+        <p id="details"></p>
+        <button id="pair" hidden>Добавить это устройство</button>
+        <pre id="state"></pre>
+      </section>
+      <section>
+        <label
+          >Скорость: <strong id="speedLabel">15%</strong
+          ><input id="speed" type="range" min="1" max="15" value="15" /></label
+        ><label
+          >Длительность, секунд<input id="seconds" type="number" min="1" max="3600" value="60"
+        /></label>
+        <div class="actions">
+          <button id="start" disabled>Запустить</button><button id="stop" class="stop">STOP</button>
+        </div>
+        <p id="runStatus"></p>
+      </section>
+      <p class="note">
+        Сеанс этой панели требует продления и останавливается при его потере. Совместимый API для
+        внешних приложений не использует таймер панели: остановкой управляет приложение. При
+        выключении сервера или потере связи отправка STOP может быть невозможна. Автоматического
+        возобновления нет.
+      </p>
+      <p id="error" role="alert"></p>
+    </main>
+  </body>
+</html>

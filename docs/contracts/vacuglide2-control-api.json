@@ -1,0 +1,157 @@
+{
+  "scope": "VacuGlide2 control API for external applications; excludes cloud accounts/content/AI and OTA",
+  "current_version": "0.2.0-rc.2",
+  "sdk_version": "2.6.0",
+  "full_compatibility": false,
+  "physical_device_accepted": false,
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/vacuglide/state",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/valve/stroke-plus",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/valve/stroke-minus",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/target-speed",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/target-speed/stop",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/local-script",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalLocalScripts and maxSpeed100; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/local-script/stop",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalLocalScripts and maxSpeed100; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/local-script/start",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalLocalScripts and maxSpeed100; STOP independent"
+    },
+    {
+      "method": "GET",
+      "path": "/vacuglide/local-script/loaded",
+      "status": "implemented-stock-reply-synthetic-tested",
+      "side_effect": "native handler always sets mode42; serialized and state-confirmed"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/local-script/replace",
+      "status": "candidate-official-wire-native-binary-offline-tested",
+      "activation": "experimentalLocalScripts; pairing and compatibilityControl"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/local-script/swap",
+      "status": "candidate-firmware-static-offline-tested",
+      "activation": "experimentalLocalScripts; pairing and compatibilityControl"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/local-script/move",
+      "status": "candidate-firmware-static-offline-tested",
+      "activation": "experimentalLocalScripts; pairing and compatibilityControl"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/load-token",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/upload-funscript-url",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/upload-funscript",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/upload-csv-url",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/upload-csv",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/stop",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/start",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/offset",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "PUT",
+      "path": "/vacuglide/sync-script/loop",
+      "status": "candidate-offline-synthetic-tested",
+      "activation": "experimentalSyncScripts; STOP independent"
+    },
+    {
+      "method": "GET",
+      "path": "/vacuglide/info",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "GET",
+      "path": "/vacuglide/connected",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "GET",
+      "path": "/autoblow/connected",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "GET",
+      "path": "/cluster/time",
+      "status": "implemented-synthetic-tested"
+    },
+    {
+      "method": "GET",
+      "path": "/events/stream",
+      "status": "implemented-firmware-static-offline-tested"
+    }
+  ],
+  "policy_differences": {},
+  "acceptance": "Source/virtual protocol tests do not establish physical acceptance; see docs/en/project.md and docs/ru/project.md"
+}

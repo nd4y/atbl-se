@@ -1,0 +1,223 @@
+{
+  "runtime": "v24.22.1",
+  "reference": "Node Buffer primitive only, not official cloud observations",
+  "cases": [
+    {
+      "field": "time",
+      "source": -1,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received -1"
+    },
+    {
+      "field": "time",
+      "source": -0.1,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received -0.1"
+    },
+    {
+      "field": "time",
+      "source": -1e-7,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received -1e-7"
+    },
+    {
+      "field": "time",
+      "source": -1e-8,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received -1e-8"
+    },
+    {
+      "field": "time",
+      "source": 255.1,
+      "accepted": true,
+      "packed": 255
+    },
+    {
+      "field": "time",
+      "source": 256,
+      "accepted": true,
+      "packed": 256
+    },
+    {
+      "field": "time",
+      "source": 10000,
+      "accepted": true,
+      "packed": 10000
+    },
+    {
+      "field": "time",
+      "source": 1000000000,
+      "accepted": true,
+      "packed": 1000000000
+    },
+    {
+      "field": "time",
+      "source": 4294967295,
+      "accepted": true,
+      "packed": 4294967295
+    },
+    {
+      "field": "time",
+      "source": 4294967296,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received 4294967296"
+    },
+    {
+      "field": "time",
+      "source": 4294967296.5,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received 4294967296.5"
+    },
+    {
+      "field": "time",
+      "source": 100000000000000000000,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received 100_000_000_000_000_000_000"
+    },
+    {
+      "field": "time",
+      "source": 1e21,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received 1e_+21"
+    },
+    {
+      "field": "time",
+      "source": "Infinity",
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received Infinity"
+    },
+    {
+      "field": "time",
+      "source": "-Infinity",
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 4294967295. Received -Infinity"
+    },
+    {
+      "field": "time",
+      "source": "NaN",
+      "accepted": true,
+      "packed": 0
+    },
+    {
+      "field": "position",
+      "source": -1,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received -1"
+    },
+    {
+      "field": "position",
+      "source": -0.1,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received -0.1"
+    },
+    {
+      "field": "position",
+      "source": -1e-7,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received -1e-7"
+    },
+    {
+      "field": "position",
+      "source": -1e-8,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received -1e-8"
+    },
+    {
+      "field": "position",
+      "source": 255.1,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 255.1"
+    },
+    {
+      "field": "position",
+      "source": 256,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 256"
+    },
+    {
+      "field": "position",
+      "source": 10000,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 10000"
+    },
+    {
+      "field": "position",
+      "source": 1000000000,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 1000000000"
+    },
+    {
+      "field": "position",
+      "source": 4294967295,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 4294967295"
+    },
+    {
+      "field": "position",
+      "source": 4294967296,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 4294967296"
+    },
+    {
+      "field": "position",
+      "source": 4294967296.5,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 4294967296.5"
+    },
+    {
+      "field": "position",
+      "source": 100000000000000000000,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 100_000_000_000_000_000_000"
+    },
+    {
+      "field": "position",
+      "source": 1e21,
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received 1e_+21"
+    },
+    {
+      "field": "position",
+      "source": "Infinity",
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received Infinity"
+    },
+    {
+      "field": "position",
+      "source": "-Infinity",
+      "accepted": false,
+      "code": "ERR_OUT_OF_RANGE",
+      "message": "The value of \"value\" is out of range. It must be >= 0 and <= 255. Received -Infinity"
+    },
+    {
+      "field": "position",
+      "source": "NaN",
+      "accepted": true,
+      "packed": 0
+    }
+  ]
+}
