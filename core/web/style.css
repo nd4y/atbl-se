@@ -1,0 +1,99 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #10151c;
+  color: #e8edf4;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 620px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+h1 {
+  font-size: 38px;
+  margin: 12px 0;
+}
+header p,
+.note,
+#details {
+  color: #aebac9;
+}
+.badge {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #70c9df;
+}
+section {
+  background: #1a2330;
+  border: 1px solid #2d3b4e;
+  border-radius: 14px;
+  padding: 22px;
+  margin: 20px 0;
+}
+label {
+  display: block;
+  margin-bottom: 20px;
+}
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid #465970;
+  background: #10151c;
+  color: inherit;
+  border-radius: 6px;
+}
+input[type="range"] {
+  accent-color: #70c9df;
+}
+button {
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 8px;
+  background: #70c9df;
+  color: #09151d;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+}
+.actions button {
+  flex: 1;
+}
+.stop {
+  background: #ee7279;
+}
+#connection {
+  font-size: 21px;
+  font-weight: 650;
+}
+pre {
+  white-space: pre-wrap;
+  font-family: inherit;
+  color: #adbfce;
+}
+.note {
+  font-size: 13px;
+  line-height: 1.6;
+}
+#error {
+  color: #ff9d9d;
+}
+p {
+  line-height: 1.5;
+}
+[hidden] {
+  display: none !important;
+}

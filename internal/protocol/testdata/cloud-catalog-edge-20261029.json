@@ -1,0 +1,588 @@
+{
+  "catalog": {
+    "id": 1,
+    "uuid": "0c9059db-50dc-4975-b144-712be1e48cc5",
+    "source_asset": "vacuglideFactoryLocalScripts-u3ASoYln.js",
+    "bytes": 170,
+    "sha256": "e0b1ad324a0d33741ceff25bc88cde51a8f53b1193663cea3cdaf11aeb21e3bc",
+    "observed_at": "2026-10-28T22:04:20.522Z",
+    "hex": "0100000001000000000000000005640000000101e8030000000ab80b000001001c0c0000001488130000001970170000001e581b00000023401f0000002da41f00000101282300000100102700000032f82a00000037e02e0000003cc83200000041983a0000004b684200000050504600000055204e0000005ff0550000005ac05d00000050906500000046606d0000003c307500000028007d00000014d0840000000aa08c00000005"
+  },
+  "cases": [
+    {
+      "name": "catalog-valid",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": 0,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:20.044Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["0", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 30
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-string",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": "0",
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:20.945Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["0", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 30
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-fraction",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": 0.5,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:21.531Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["0.5", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 30
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-scientific",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": 1e-7,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:22.117Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["1e-7", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 30
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-array",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": [0],
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:22.705Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["0", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 30
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-null",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": null,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:23.290Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["0", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 30
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-bool",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": true,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:23.885Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["1", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 30
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-last",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": 29,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:24.471Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["29", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 1
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-outside",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": 30,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:25.057Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["30", "1"]
+        }
+      ],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "DeviceCommandResultError",
+          "message": "INVALID_INDEX"
+        }
+      },
+      "local_policy": "bounded-slot"
+    },
+    {
+      "name": "catalog-negative",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": -1,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:25.643Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["-1", "1"]
+        }
+      ],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "DeviceCommandResultError",
+          "message": "INVALID_INDEX"
+        }
+      },
+      "local_policy": "bounded-slot"
+    },
+    {
+      "name": "catalog-outside-fraction",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": 29.5,
+        "newLocalScriptUuid": "$CATALOG"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:26.231Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["29.5", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 1
+        ]
+      },
+      "local_policy": "bounded-slot"
+    },
+    {
+      "name": "catalog-array-token",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": 0,
+        "newLocalScriptUuid": ["$CATALOG"]
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:26.816Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["0", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 1
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "catalog-extra-case",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": 0,
+        "newLocalScriptUuid": "$CATALOG",
+        "NEWLOCALSCRIPTUUID": "bad",
+        "extra": true
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:27.401Z",
+      "wires": [
+        {
+          "command": "local-script-replace",
+          "args": ["0", "1"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 1
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "swap-both-missing",
+      "rest": "/vacuglide/local-script/swap",
+      "request_body": {},
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:27.989Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'scriptIndexA'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "swap-missing-first-invalid-second",
+      "rest": "/vacuglide/local-script/swap",
+      "request_body": {
+        "scriptIndexB": {}
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:28.414Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'scriptIndexA'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "swap-invalid-first-missing-second",
+      "rest": "/vacuglide/local-script/swap",
+      "request_body": {
+        "scriptIndexA": {}
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:28.847Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'scriptIndexB'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "swap-fraction-last",
+      "rest": "/vacuglide/local-script/swap",
+      "request_body": {
+        "scriptIndexA": 28.9,
+        "scriptIndexB": 29
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:29.271Z",
+      "wires": [
+        {
+          "command": "local-script-swap",
+          "args": ["28.9", "29"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 1, 29
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "swap-multi-array",
+      "rest": "/vacuglide/local-script/swap",
+      "request_body": {
+        "scriptIndexA": [0, 1],
+        "scriptIndexB": 2
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:29.770Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body/scriptIndexA must be number"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "move-both-missing",
+      "rest": "/vacuglide/local-script/move",
+      "request_body": {},
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:30.193Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'fromIndex'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "move-missing-first-invalid-second",
+      "rest": "/vacuglide/local-script/move",
+      "request_body": {
+        "toIndex": {}
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:30.617Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'fromIndex'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "move-invalid-first-missing-second",
+      "rest": "/vacuglide/local-script/move",
+      "request_body": {
+        "fromIndex": {}
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:31.040Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'toIndex'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "move-fraction-last",
+      "rest": "/vacuglide/local-script/move",
+      "request_body": {
+        "fromIndex": 28.9,
+        "toIndex": 29
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:31.464Z",
+      "wires": [
+        {
+          "command": "local-script-move",
+          "args": ["28.9", "29"]
+        }
+      ],
+      "status": 200,
+      "response": {
+        "loadedScripts": [
+          1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 1
+        ]
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "move-multi-array",
+      "rest": "/vacuglide/local-script/move",
+      "request_body": {
+        "fromIndex": [0, 1],
+        "toIndex": 2
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:31.962Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body/fromIndex must be number"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "replace-both-missing",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {},
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:32.386Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'replacedLocalScriptIndex'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "replace-missing-index-invalid-token",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "newLocalScriptUuid": {}
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:32.809Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'replacedLocalScriptIndex'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "replace-invalid-index-missing-token",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": {}
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:33.232Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body must have required property 'newLocalScriptUuid'"
+        }
+      },
+      "local_policy": "exact"
+    },
+    {
+      "name": "replace-invalid-index-short-token",
+      "rest": "/vacuglide/local-script/replace",
+      "request_body": {
+        "replacedLocalScriptIndex": {},
+        "newLocalScriptUuid": "x"
+      },
+      "upload": false,
+      "observed_at": "2026-10-28T22:04:33.656Z",
+      "wires": [],
+      "status": 400,
+      "response": {
+        "error": {
+          "code": "FST_ERR_VALIDATION",
+          "message": "body/replacedLocalScriptIndex must be number"
+        }
+      },
+      "local_policy": "exact"
+    }
+  ]
+}

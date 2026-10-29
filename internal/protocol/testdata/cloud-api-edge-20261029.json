@@ -1,0 +1,1485 @@
+[
+  {
+    "name": "seed",
+    "raw": "{\"actions\":[{\"at\":0,\"pos\":0},{\"at\":1000,\"pos\":60},{\"at\":2000,\"pos\":0}]}",
+    "upload": true,
+    "observed_at": "2026-10-28T21:44:37.338Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": ["$SEED"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-valid",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": "$SEED"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:38.044Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": ["$SEED"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-extra",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": "$SEED",
+      "extra": true
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:38.538Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": ["$SEED"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-case",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "SCRIPTTOKEN": "$SEED"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:39.032Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'scriptToken'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-missing",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {},
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:39.454Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'scriptToken'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-null",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": null
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:39.879Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": [""]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "local-token-required"
+  },
+  {
+    "name": "token-number",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": 12
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:40.372Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": ["12"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "local-token-required"
+  },
+  {
+    "name": "token-bool",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": true
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:40.867Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": ["true"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "local-token-required"
+  },
+  {
+    "name": "token-array",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": ["$SEED"]
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:41.361Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": ["$SEED"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-empty-array",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": []
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:41.855Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/scriptToken must be string"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-object",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": {}
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:42.278Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/scriptToken must be string"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-empty",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": ""
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:42.708Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": [""]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "local-token-required"
+  },
+  {
+    "name": "token-bad",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": "abc"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:43.202Z",
+    "wires": [
+      {
+        "command": "sync-script-load-token",
+        "args": ["abc"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "local_policy": "local-token-required"
+  },
+  {
+    "name": "url-missing",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {},
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:43.695Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'url'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-case",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "URL": "https://example.invalid/a"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:44.119Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'url'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-null",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": null
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:44.542Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "SyncScriptService: Error creating sync script from url : TypeError: Invalid URL"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-number",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": 12
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:44.966Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "SyncScriptService: Error creating sync script from url 12: TypeError: Invalid URL"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-bool",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": true
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:45.402Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "SyncScriptService: Error creating sync script from url true: TypeError: Invalid URL"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-array",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": [12]
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:45.829Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "SyncScriptService: Error creating sync script from url 12: TypeError: Invalid URL"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-empty-array",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": []
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:46.253Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/url must be string"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-object",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": {}
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:46.676Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/url must be string"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-empty",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": ""
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:47.099Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "SyncScriptService: Error creating sync script from url : TypeError: Invalid URL"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "csv-url-missing",
+    "rest": "/vacuglide/sync-script/upload-csv-url",
+    "request_body": {},
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:47.523Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'url'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "csv-url-object",
+    "rest": "/vacuglide/sync-script/upload-csv-url",
+    "request_body": {
+      "url": {}
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:47.947Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/url must be string"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-valid",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": 0,
+      "scriptIndexB": 1
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:48.370Z",
+    "wires": [
+      {
+        "command": "local-script-swap",
+        "args": ["0", "1"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-extra",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": 0,
+      "scriptIndexB": 1,
+      "extra": true
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:48.865Z",
+    "wires": [
+      {
+        "command": "local-script-swap",
+        "args": ["0", "1"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-case",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "SCRIPTINDEXA": 0,
+      "scriptIndexB": 1
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:49.358Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'scriptIndexA'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-missing",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": 0
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:49.781Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'scriptIndexB'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-null-bool",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": null,
+      "scriptIndexB": true
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:50.204Z",
+    "wires": [
+      {
+        "command": "local-script-swap",
+        "args": ["0", "1"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-strings",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": "0",
+      "scriptIndexB": "1"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:50.697Z",
+    "wires": [
+      {
+        "command": "local-script-swap",
+        "args": ["0", "1"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-fractional",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": 0.5,
+      "scriptIndexB": 1.5
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:51.189Z",
+    "wires": [
+      {
+        "command": "local-script-swap",
+        "args": ["0.5", "1.5"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-scientific",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": 1e-7,
+      "scriptIndexB": 2
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:51.681Z",
+    "wires": [
+      {
+        "command": "local-script-swap",
+        "args": ["1e-7", "2"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        2, 3, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-outside",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": 29.5,
+      "scriptIndexB": 1
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:52.175Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/scriptIndexA must be <= 29"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-arrays",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": [0],
+      "scriptIndexB": [1]
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:52.597Z",
+    "wires": [
+      {
+        "command": "local-script-swap",
+        "args": ["0", "1"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        3, 2, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-object",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": {},
+      "scriptIndexB": 1
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:53.095Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/scriptIndexA must be number"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-empty-array",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": [],
+      "scriptIndexB": 1
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:53.523Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/scriptIndexA must be number"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "move-extra",
+    "rest": "/vacuglide/local-script/move",
+    "request_body": {
+      "fromIndex": 0,
+      "toIndex": 1,
+      "scriptIndexA": {}
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:53.946Z",
+    "wires": [
+      {
+        "command": "local-script-move",
+        "args": ["0", "1"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        2, 3, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "move-case",
+    "rest": "/vacuglide/local-script/move",
+    "request_body": {
+      "fromIndex": 0,
+      "TOINDEX": 1
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:54.441Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'toIndex'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "move-missing",
+    "rest": "/vacuglide/local-script/move",
+    "request_body": {
+      "fromIndex": 0
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:54.865Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'toIndex'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "move-strings",
+    "rest": "/vacuglide/local-script/move",
+    "request_body": {
+      "fromIndex": "0",
+      "toIndex": "1"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:55.288Z",
+    "wires": [
+      {
+        "command": "local-script-move",
+        "args": ["0", "1"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        3, 2, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "move-fractional",
+    "rest": "/vacuglide/local-script/move",
+    "request_body": {
+      "fromIndex": 0.5,
+      "toIndex": 1.5
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:55.782Z",
+    "wires": [
+      {
+        "command": "local-script-move",
+        "args": ["0.5", "1.5"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        2, 3, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "move-arrays",
+    "rest": "/vacuglide/local-script/move",
+    "request_body": {
+      "fromIndex": [0],
+      "toIndex": [1]
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:56.275Z",
+    "wires": [
+      {
+        "command": "local-script-move",
+        "args": ["0", "1"]
+      }
+    ],
+    "status": 200,
+    "response": {
+      "loadedScripts": [
+        3, 2, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27, 28, 29, 30
+      ]
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "move-object",
+    "rest": "/vacuglide/local-script/move",
+    "request_body": {
+      "fromIndex": 0,
+      "toIndex": {}
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:56.771Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/toIndex must be number"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-valid",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": "$SEED"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:57.193Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "ValidationError",
+        "message": "No active local script found with the uuid $SEED for this device"
+      }
+    },
+    "local_policy": "local-catalog"
+  },
+  {
+    "name": "replace-extra",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": "$SEED",
+      "extra": true
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:57.710Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "ValidationError",
+        "message": "No active local script found with the uuid $SEED for this device"
+      }
+    },
+    "local_policy": "local-catalog"
+  },
+  {
+    "name": "replace-case",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "NEWLOCALSCRIPTUUID": "$SEED"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:58.224Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'newLocalScriptUuid'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-missing",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:58.662Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'newLocalScriptUuid'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-string-index",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": "0",
+      "newLocalScriptUuid": "$SEED"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:59.085Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "ValidationError",
+        "message": "No active local script found with the uuid $SEED for this device"
+      }
+    },
+    "local_policy": "local-catalog"
+  },
+  {
+    "name": "replace-fractional-index",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0.5,
+      "newLocalScriptUuid": "$SEED"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:44:59.600Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "ValidationError",
+        "message": "No active local script found with the uuid $SEED for this device"
+      }
+    },
+    "local_policy": "local-catalog"
+  },
+  {
+    "name": "replace-array-index",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": [0],
+      "newLocalScriptUuid": "$SEED"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:45:00.114Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "ValidationError",
+        "message": "No active local script found with the uuid $SEED for this device"
+      }
+    },
+    "local_policy": "local-catalog"
+  },
+  {
+    "name": "replace-array-token",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": ["$SEED"]
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:45:00.638Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "ValidationError",
+        "message": "No active local script found with the uuid $SEED for this device"
+      }
+    },
+    "local_policy": "local-catalog"
+  },
+  {
+    "name": "replace-null-token",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": null
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:45:01.154Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/newLocalScriptUuid must NOT have fewer than 36 characters"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-object-token",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": {}
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:45:01.577Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/newLocalScriptUuid must be string"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-number-token",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": 12
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:45:02.000Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/newLocalScriptUuid must NOT have fewer than 36 characters"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-object-index",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": {},
+      "newLocalScriptUuid": "$SEED"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:45:02.423Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/replacedLocalScriptIndex must be number"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "root-array",
+    "raw": "[]",
+    "upload": true,
+    "observed_at": "2026-10-28T21:45:02.846Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "Funscript data is missing actions"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "root-bool",
+    "raw": "true",
+    "upload": true,
+    "observed_at": "2026-10-28T21:45:03.270Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "Funscript data is missing actions"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "root-number",
+    "raw": "123",
+    "upload": true,
+    "observed_at": "2026-10-28T21:45:03.695Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "Funscript data is missing actions"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "root-string",
+    "raw": "\"abc\"",
+    "upload": true,
+    "observed_at": "2026-10-28T21:45:04.118Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "Funscript data is missing actions"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "root-null",
+    "raw": "null",
+    "upload": true,
+    "observed_at": "2026-10-28T21:45:04.542Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "No funscript data provided"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "root-false",
+    "raw": "false",
+    "upload": true,
+    "observed_at": "2026-10-28T21:46:31.059Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "No funscript data provided"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "root-zero",
+    "raw": "0",
+    "upload": true,
+    "observed_at": "2026-10-28T21:46:31.610Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "No funscript data provided"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "root-empty-string",
+    "raw": "\"\"",
+    "upload": true,
+    "observed_at": "2026-10-28T21:46:32.027Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "No funscript data provided"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-short",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:32.443Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/newLocalScriptUuid must NOT have fewer than 36 characters"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-long",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:32.860Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/newLocalScriptUuid must NOT have more than 36 characters"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-nonuuid",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 0,
+      "newLocalScriptUuid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:33.277Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "22P02",
+        "message": "invalid input syntax for type uuid: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\""
+      }
+    },
+    "local_policy": "local-slot-validation"
+  },
+  {
+    "name": "replace-missing-index",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "newLocalScriptUuid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:33.794Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'replacedLocalScriptIndex'"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "replace-outside",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": 29.5,
+      "newLocalScriptUuid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:34.211Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "22P02",
+        "message": "invalid input syntax for type uuid: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\""
+      }
+    },
+    "local_policy": "local-slot-validation"
+  },
+  {
+    "name": "replace-negative",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": -1,
+      "newLocalScriptUuid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:34.720Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "22P02",
+        "message": "invalid input syntax for type uuid: \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\""
+      }
+    },
+    "local_policy": "local-slot-validation"
+  },
+  {
+    "name": "replace-empty-index",
+    "rest": "/vacuglide/local-script/replace",
+    "request_body": {
+      "replacedLocalScriptIndex": "",
+      "newLocalScriptUuid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:35.230Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/replacedLocalScriptIndex must be number"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-null-array",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": [null]
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:35.645Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "Error",
+        "message": "SyncScriptService: Error creating sync script from url : TypeError: Invalid URL"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "url-nested-array",
+    "rest": "/vacuglide/sync-script/upload-funscript-url",
+    "request_body": {
+      "url": [[12]]
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:36.068Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/url must be string"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "token-nested-array",
+    "rest": "/vacuglide/sync-script/load-token",
+    "request_body": {
+      "scriptToken": [["abc"]]
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:36.483Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/scriptToken must be string"
+      }
+    },
+    "local_policy": "exact"
+  },
+  {
+    "name": "swap-negative",
+    "rest": "/vacuglide/local-script/swap",
+    "request_body": {
+      "scriptIndexA": -1e-7,
+      "scriptIndexB": 1
+    },
+    "upload": false,
+    "observed_at": "2026-10-28T21:46:36.897Z",
+    "wires": [],
+    "status": 400,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/scriptIndexA must be >= 0"
+      }
+    },
+    "local_policy": "exact"
+  }
+]

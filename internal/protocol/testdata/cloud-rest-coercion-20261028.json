@@ -1,0 +1,590 @@
+[
+  {
+    "case": "speed-fraction",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": 15.9
+    },
+    "status": 200,
+    "wire_arguments": ["15.9"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 0,
+      "targetSpeed": 15,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "speed-small",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": 0.9
+    },
+    "status": 200,
+    "wire_arguments": ["0.9"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "speed-negative",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": -0.1
+    },
+    "status": 400,
+    "wire_arguments": null,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/targetSpeed must be >= 0"
+      }
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "speed-over",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": 100.1
+    },
+    "status": 400,
+    "wire_arguments": null,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/targetSpeed must be <= 100"
+      }
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "speed-string",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": "15"
+    },
+    "status": 200,
+    "wire_arguments": ["15"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 0,
+      "targetSpeed": 15,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "speed-null",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": null
+    },
+    "status": 200,
+    "wire_arguments": ["0"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "start-fraction",
+    "path": "/vacuglide/sync-script/start",
+    "request": {
+      "startTimeMs": 0.9
+    },
+    "status": 200,
+    "wire_arguments": ["0.9"],
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PLAYING",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "start-negative",
+    "path": "/vacuglide/sync-script/start",
+    "request": {
+      "startTimeMs": -0.1
+    },
+    "status": 200,
+    "wire_arguments": ["-0.1"],
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PLAYING",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "start-string",
+    "path": "/vacuglide/sync-script/start",
+    "request": {
+      "startTimeMs": "100"
+    },
+    "status": 200,
+    "wire_arguments": ["100"],
+    "response": {
+      "operationalMode": "SYNC_SCRIPT_PLAYING",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "start-missing",
+    "path": "/vacuglide/sync-script/start",
+    "request": {},
+    "status": 400,
+    "wire_arguments": null,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body must have required property 'startTimeMs'"
+      }
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "offset-fraction",
+    "path": "/vacuglide/sync-script/offset",
+    "request": {
+      "offsetTimeMs": -1.9
+    },
+    "status": 200,
+    "wire_arguments": ["-1.9"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": -1,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "offset-string",
+    "path": "/vacuglide/sync-script/offset",
+    "request": {
+      "offsetTimeMs": "100"
+    },
+    "status": 200,
+    "wire_arguments": ["100"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 100,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "offset-limit-fraction",
+    "path": "/vacuglide/sync-script/offset",
+    "request": {
+      "offsetTimeMs": 16777214.1
+    },
+    "status": 200,
+    "wire_arguments": ["16777214.1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 16777214,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "loop-bool",
+    "path": "/vacuglide/sync-script/loop",
+    "request": {
+      "loop": true
+    },
+    "status": 200,
+    "wire_arguments": ["1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 16777214,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "loop-number",
+    "path": "/vacuglide/sync-script/loop",
+    "request": {
+      "loop": 1
+    },
+    "status": 200,
+    "wire_arguments": ["1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 16777214,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "loop-string",
+    "path": "/vacuglide/sync-script/loop",
+    "request": {
+      "loop": "true"
+    },
+    "status": 200,
+    "wire_arguments": ["1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 16777214,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "valve-bool",
+    "path": "/vacuglide/valve/stroke-plus",
+    "request": {
+      "valveState": true
+    },
+    "status": 200,
+    "wire_arguments": ["1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": true,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 16777214,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "valve-number",
+    "path": "/vacuglide/valve/stroke-plus",
+    "request": {
+      "valveState": 1
+    },
+    "status": 200,
+    "wire_arguments": ["1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": true,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 16777214,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "valve-string",
+    "path": "/vacuglide/valve/stroke-plus",
+    "request": {
+      "valveState": "true"
+    },
+    "status": 200,
+    "wire_arguments": ["1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PAUSED",
+      "localScript": 0,
+      "targetSpeed": 0,
+      "strokePlusValve": true,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 16777214,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "local-fraction",
+    "path": "/vacuglide/local-script",
+    "request": {
+      "localScriptIndex": 1.9
+    },
+    "status": 200,
+    "wire_arguments": ["1.9"],
+    "response": {
+      "operationalMode": "LOCAL_SCRIPT_PLAYING",
+      "localScript": 1,
+      "targetSpeed": 0,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 100,
+      "syncScriptOffsetTime": 16777214,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest"
+  },
+  {
+    "case": "micro-speed",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": 1e-7
+    },
+    "status": 200,
+    "wire_arguments": ["1e-7"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 0,
+      "targetSpeed": 1,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest2"
+  },
+  {
+    "case": "micro-local",
+    "path": "/vacuglide/local-script",
+    "request": {
+      "localScriptIndex": 1e-7
+    },
+    "status": 200,
+    "wire_arguments": ["1e-7"],
+    "response": {
+      "operationalMode": "LOCAL_SCRIPT_PLAYING",
+      "localScript": 1,
+      "targetSpeed": 1,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": 0,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest2"
+  },
+  {
+    "case": "micro-offset",
+    "path": "/vacuglide/sync-script/offset",
+    "request": {
+      "offsetTimeMs": -1e-7
+    },
+    "status": 200,
+    "wire_arguments": ["-1e-7"],
+    "response": {
+      "operationalMode": "LOCAL_SCRIPT_PLAYING",
+      "localScript": 1,
+      "targetSpeed": 1,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": -1,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest2"
+  },
+  {
+    "case": "speed-array",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": [15]
+    },
+    "status": 200,
+    "wire_arguments": ["15"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 1,
+      "targetSpeed": 15,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": -1,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": false
+    },
+    "source_batch": "batch-rest2"
+  },
+  {
+    "case": "loop-array",
+    "path": "/vacuglide/sync-script/loop",
+    "request": {
+      "loop": [true]
+    },
+    "status": 200,
+    "wire_arguments": ["1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 1,
+      "targetSpeed": 15,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": -1,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest2"
+  },
+  {
+    "case": "speed-extra",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": 15,
+      "unrelated": 123
+    },
+    "status": 200,
+    "wire_arguments": ["15"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 1,
+      "targetSpeed": 15,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": -1,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest2"
+  },
+  {
+    "case": "valve-false-string",
+    "path": "/vacuglide/valve/stroke-plus",
+    "request": {
+      "valveState": "false"
+    },
+    "status": 200,
+    "wire_arguments": ["0"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 1,
+      "targetSpeed": 15,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": -1,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest2"
+  },
+  {
+    "case": "loop-two",
+    "path": "/vacuglide/sync-script/loop",
+    "request": {
+      "loop": 2
+    },
+    "status": 400,
+    "wire_arguments": null,
+    "response": {
+      "error": {
+        "code": "FST_ERR_VALIDATION",
+        "message": "body/loop must be boolean"
+      }
+    },
+    "source_batch": "batch-rest2"
+  },
+  {
+    "case": "speed-boolean",
+    "path": "/vacuglide/target-speed",
+    "request": {
+      "targetSpeed": true
+    },
+    "status": 200,
+    "wire_arguments": ["1"],
+    "response": {
+      "operationalMode": "TARGET_SPEED_PLAYING",
+      "localScript": 1,
+      "targetSpeed": 1,
+      "strokePlusValve": false,
+      "strokeMinusValve": false,
+      "syncScriptCurrentTime": 0,
+      "syncScriptOffsetTime": -1,
+      "syncScriptToken": "[script-token]",
+      "syncScriptLoop": true
+    },
+    "source_batch": "batch-rest2"
+  }
+]
