@@ -16,7 +16,7 @@ Persistent data includes local control key, pairing identity, configuration and 
 
 The reference profile implements 26 control operations, original catalog identity and binary transfer. Accounts, video catalog, community, AI and OTA are excluded. Operator-visible policy differences include local pairing, explicit control/script flags, origin allowlisting, bounded storage and independently managed data. See the machine-readable contract.
 
-Existing software evidence from candidate review: 515 Go tests/subtests under race detection, go vet, 57 SDK/adapter requests each over HTTP and HTTPS, six panel regressions, eight codec tests, four packager tests and five mocked Windows lifecycle checks. The publication adds simulator cases and reruns checks on its exact head; the PR and `software-verification` status are authoritative for that revision.
+Current source verification and its exact revision are recorded in the [standard review](review-2026-10-29.md#software-verification---2026-10-30). Required PR statuses must be checked again after each source change; test counts do not establish physical compatibility.
 
 **Not verified:** physical Go-candidate playback/valve behavior, native Windows Hotspot end to end, cold startup and power/network loss on the target device, complete accessibility, clean install/upgrade/restore on supported physical targets, and advertised scale beyond tested bounds. The generic repository-standard job cannot establish these outcomes.
 

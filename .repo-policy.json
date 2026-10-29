@@ -34,18 +34,19 @@
       "status": "NOT_VERIFIED"
     },
     "fullHistory": {
-      "status": "NOT_VERIFIED"
+      "status": "PASS",
+      "reference": "Gitleaks 8.30.1 full history through 8a34d860cbd5b4ed0ac77146877fa930bdc12ea4, including merge patches; rerun on every introduced revision"
     },
     "hostingEnforcement": {
-      "status": "NOT_VERIFIED",
-      "reference": "Recheck protections after repository rename; current review: docs/en/review-2026-10-29.md"
+      "status": "PASS",
+      "reference": "2026-10-30 readback after rename to nd4y/atblse: protected main, strict repository-standard/software-verification checks, enforced admins, secret scanning and push protection; docs/en/review-2026-10-29.md"
     },
     "physical": {
       "status": "NOT_VERIFIED"
     },
     "review": {
-      "status": "NOT_VERIFIED",
-      "reference": "docs/en/review-2026-10-29.md; required checks on the exact PR revision remain authoritative"
+      "status": "PASS",
+      "reference": "docs/en/review-2026-10-29.md: 45-rule applicability audit and verified software fixes at 8a34d860cbd5b4ed0ac77146877fa930bdc12ea4; physical/release/profile gates remain separate"
     }
   }
 }
