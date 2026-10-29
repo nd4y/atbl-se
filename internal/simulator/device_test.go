@@ -1,9 +1,9 @@
 package simulator
 
 import (
-	"autoblow.local/emulator/internal/protocol"
 	"encoding/binary"
 	"errors"
+	"github.com/nd4y/atblse/internal/protocol"
 	"strings"
 	"testing"
 )

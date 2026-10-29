@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 const MAC = "020000000001"

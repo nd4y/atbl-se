@@ -1,4 +1,4 @@
-module autoblow.local/emulator
+module github.com/nd4y/atblse
 
 go 1.24.0
 

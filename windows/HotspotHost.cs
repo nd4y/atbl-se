@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Windows.Devices.WiFiDirect;
 
-namespace AutoblowLocal {
+namespace atblse {
  public sealed class HotspotHost : IDisposable {
   private WiFiDirectAdvertisementPublisher publisher;
   private WiFiDirectConnectionListener listener;

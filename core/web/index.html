@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>ATBL-SE</title>
+    <title>atblse</title>
     <link rel="stylesheet" href="/style.css" />
     <script defer src="/app.js"></script>
   </head>
@@ -11,7 +11,7 @@
     <main>
       <header>
         <span class="badge">ЛОКАЛЬНОЕ УПРАВЛЕНИЕ</span>
-        <h1>ATBL-SE</h1>
+        <h1>atblse</h1>
         <p>VacuGlide без облачного сервера</p>
       </header>
       <section id="login">
@@ -20,7 +20,7 @@
         ><button id="loginButton">Подключиться</button>
       </section>
       <section>
-        <div id="connection">Ожидание подключения</div>
+        <div id="connection" role="status" aria-live="polite">Ожидание подключения</div>
         <p id="details"></p>
         <button id="pair" hidden>Добавить это устройство</button>
         <pre id="state"></pre>
@@ -35,7 +35,7 @@
         <div class="actions">
           <button id="start" disabled>Запустить</button><button id="stop" class="stop">STOP</button>
         </div>
-        <p id="runStatus"></p>
+        <p id="runStatus" role="status" aria-live="polite"></p>
       </section>
       <p class="note">
         Сеанс этой панели требует продления и останавливается при его потере. Совместимый API для

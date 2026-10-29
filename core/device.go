@@ -8,8 +8,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"autoblow.local/emulator/internal/protocol"
 	"github.com/gorilla/websocket"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 var ErrUnavailable = errors.New("device is not ready")

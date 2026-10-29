@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 type deviceEvent struct {
@@ -79,7 +79,11 @@ func drainPendingEvents(ch chan deviceEvent) {
 	}
 }
 
-func (s *Server) serveDeviceEvents(w http.ResponseWriter, r *http.Request, token string) {
+func (s *Server) serveDeviceEvents(w http.ResponseWriter, r *http.Request, token string, device *Device, local bool) {
+	var disconnected <-chan struct{}
+	if !local && device != nil {
+		disconnected = device.done
+	}
 	ch, ok := s.events.subscribe()
 	if !ok {
 		compatibilityError(w, 429, "EVENT_STREAM_CAPACITY", "event stream unavailable")
@@ -96,6 +100,20 @@ func (s *Server) serveDeviceEvents(w http.ResponseWriter, r *http.Request, token
 	w.Header().Set("X-Accel-Buffering", "no")
 	controller := http.NewResponseController(w)
 	send := func(name string, value any) error {
+		// Recheck before every write: a queued event must not escape after revocation.
+		if !local {
+			s.mu.Lock()
+			valid := !s.closing && s.device == device
+			s.mu.Unlock()
+			select {
+			case <-disconnected:
+				return ErrUnavailable
+			default:
+			}
+			if !valid {
+				return ErrUnavailable
+			}
+		}
 		b, err := json.Marshal(value)
 		if err != nil {
 			return err
@@ -113,6 +131,8 @@ func (s *Server) serveDeviceEvents(w http.ResponseWriter, r *http.Request, token
 	defer timer.Stop()
 	for {
 		select {
+		case <-disconnected:
+			return
 		case <-r.Context().Done():
 			return
 		case at := <-timer.C:

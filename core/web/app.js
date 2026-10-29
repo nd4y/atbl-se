@@ -87,6 +87,8 @@ async function refresh() {
     }
   } catch (e) {
     error(e);
+    $("connection").textContent = "Нет связи с сервером. Данные устарели.";
+    $("pair").hidden = true;
     $("start").disabled = true;
     if (hadSession) $("runStatus").textContent = "Связь с сервером потеряна. Проверьте устройство.";
   } finally {

@@ -66,6 +66,7 @@ func (s *Server) acceptDevice(w http.ResponseWriter, r *http.Request) {
 		s.mu.Lock()
 		if s.device == d {
 			s.device = nil
+			s.deviceTokenHash = [32]byte{}
 		}
 		s.mu.Unlock()
 	}()

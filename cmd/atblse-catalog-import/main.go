@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"autoblow.local/emulator/core"
+	"github.com/nd4y/atblse/core"
 )
 
 func main() {

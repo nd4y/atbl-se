@@ -4,7 +4,17 @@
   "kind": "product",
   "lifecycle": "experiment",
   "adoption": "adopting",
-  "profiles": ["web", "cli", "service", "network", "integration", "firmware", "docs"],
+  "profiles": [
+    "web",
+    "cli",
+    "library",
+    "service",
+    "network",
+    "integration",
+    "data",
+    "firmware",
+    "docs"
+  ],
   "docs": {
     "mode": "strict",
     "readmes": ["README.md", "README.ru.md"],
@@ -24,14 +34,19 @@
       "status": "NOT_VERIFIED"
     },
     "fullHistory": {
-      "status": "NOT_VERIFIED"
+      "status": "PASS",
+      "reference": "Gitleaks 8.30.1 full history through 8a34d860cbd5b4ed0ac77146877fa930bdc12ea4, including merge patches; rerun on every introduced revision"
     },
     "hostingEnforcement": {
-      "status": "NOT_VERIFIED",
-      "reference": "Public visibility and protected main are authorized; configure and read back hosting protection after publishing the named project"
+      "status": "PASS",
+      "reference": "2026-10-30 readback for nd4y/atblse: protected main, strict repository-standard/software-verification checks, enforced admins, secret scanning and push protection; docs/en/verification.md"
     },
     "physical": {
       "status": "NOT_VERIFIED"
+    },
+    "review": {
+      "status": "PASS",
+      "reference": "docs/en/verification.md: current rule applicability and software evidence for runtime 8a34d860cbd5b4ed0ac77146877fa930bdc12ea4; physical/release/profile gates remain separate"
     }
   }
 }

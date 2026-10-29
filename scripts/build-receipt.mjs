@@ -4,8 +4,8 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 const root = fileURLToPath(new URL("../", import.meta.url)),
-  out = process.env.AUTOBLOW_RESULTS;
-if (!out) throw Error("AUTOBLOW_RESULTS required");
+  out = process.env.ATBLSE_RESULTS;
+if (!out) throw Error("ATBLSE_RESULTS required");
 const sha = (b) => crypto.createHash("sha256").update(b).digest("hex");
 const sourceFiles = {};
 function walk(relative) {
@@ -20,11 +20,11 @@ function walk(relative) {
 for (const relative of ["go.mod", "go.sum", "core", "internal", "cmd"]) walk(relative);
 const binaries = {};
 for (const name of [
-  "autoblow-server",
-  "autoblow-catalog-import",
-  "autoblow-server.exe",
-  "autoblow-catalog-import.exe",
-  "AutoblowLocal.exe",
+  "atblse-server",
+  "atblse-catalog-import",
+  "atblse-server.exe",
+  "atblse-catalog-import.exe",
+  "atblse.exe",
   "ca-certificates.crt",
 ]) {
   const b = fs.readFileSync(path.join(out, name));

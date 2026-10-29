@@ -1,11 +1,11 @@
 package core
 
 import (
-	"autoblow.local/emulator/internal/protocol"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
+	"github.com/nd4y/atblse/internal/protocol"
 	"os"
 	"strings"
 	"testing"

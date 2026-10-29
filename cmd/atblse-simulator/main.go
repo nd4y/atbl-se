@@ -19,8 +19,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"autoblow.local/emulator/core"
-	"autoblow.local/emulator/internal/simulator"
+	"github.com/nd4y/atblse/core"
+	"github.com/nd4y/atblse/internal/simulator"
 )
 
 func main() {
@@ -74,7 +74,7 @@ func run() error {
 }
 
 func startLab() (*core.Server, []byte, func(), error) {
-	dir, e := os.MkdirTemp("", "autoblow-local-lab-")
+	dir, e := os.MkdirTemp("", "atblse-lab-")
 	if e != nil {
 		return nil, nil, nil, e
 	}
@@ -89,7 +89,7 @@ func startLab() (*core.Server, []byte, func(), error) {
 		cleanupDir()
 		return nil, nil, nil, e
 	}
-	cert := &x509.Certificate{SerialNumber: serial, Subject: pkix.Name{CommonName: "ATBL-SE synthetic lab"}, NotBefore: time.Now().Add(-time.Minute), NotAfter: time.Now().Add(2 * time.Hour), IPAddresses: []net.IP{net.ParseIP("127.0.0.1")}, KeyUsage: x509.KeyUsageDigitalSignature, ExtKeyUsage: []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth}}
+	cert := &x509.Certificate{SerialNumber: serial, Subject: pkix.Name{CommonName: "atblse synthetic lab"}, NotBefore: time.Now().Add(-time.Minute), NotAfter: time.Now().Add(2 * time.Hour), IPAddresses: []net.IP{net.ParseIP("127.0.0.1")}, KeyUsage: x509.KeyUsageDigitalSignature, ExtKeyUsage: []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth}}
 	der, e := x509.CreateCertificate(rand.Reader, cert, cert, &key.PublicKey, key)
 	if e != nil {
 		cleanupDir()
