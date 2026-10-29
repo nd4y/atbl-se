@@ -2,6 +2,8 @@
 
 [Русский](../ru/guide.md) | [README](../../README.md)
 
+The project is named ATBL-SE. Existing command paths, executable filenames and the `%LOCALAPPDATA%/AutoblowLocal` state directory retain their compatibility names; changing the project name does not move or erase data.
+
 ## Installation and network
 
 The runtime has no cloud dependency. Preload binaries, Docker images and configuration before disconnecting WAN. Do not expose device or control ports to the internet. Limit DNS/NAT changes to the intended device and keep an independent way back to the router.
@@ -21,7 +23,7 @@ Data and hotspot credentials live under `%LOCALAPPDATA%/AutoblowLocal`. Do not p
 
 ### NAS Docker
 
-Build the Linux server into an isolated image context with `deploy/Dockerfile` and `/etc/ssl/certs/ca-certificates.crt`, then build/tag `autoblow-local:0.2.0-rc.2`. The scratch image contains the executable and CA roots. Save it with `docker save` and transfer the archive for an offline `docker load`.
+Build the Linux server into an isolated image context with `deploy/Dockerfile` and `/etc/ssl/certs/ca-certificates.crt`, then build/tag `atbl-se:0.2.0-rc.2`. The scratch image contains the executable and CA roots. Save it with `docker save` and transfer the archive for an offline `docker load`.
 
 Set `AUTOBLOW_DATA_DIR` and `AUTOBLOW_CONFIG_DIR` to private absolute directories. Copy `deploy/server.example.json` to the latter as `server.json`. UID/GID 65532 needs write access to data and read access to config. `deploy/compose.yaml` uses `pull_policy: never`, `restart: no`, read-only root, 96 MiB and no additional capabilities. It maps host TLS port 20445 to container 20443 and API 20881 to 20880. Nothing is installed or started by publishing this repository.
 

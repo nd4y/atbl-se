@@ -6,7 +6,7 @@ class PackageReceiptTest(unittest.TestCase):
   (root/'scripts').mkdir();(root/'build').mkdir()
   source=pathlib.Path(os.environ.get('AUTOBLOW_PACKAGER',str(pathlib.Path(__file__).with_name('package-release.py'))))
   (root/'scripts/package-release.py').write_bytes(source.read_bytes())
-  files={'README.md':b'fixture','core/server.go':b'package core\nconst Version = "0.2.0-rc.2"\n','windows/Launcher.ps1':b"$v -eq '0.2.0-rc.2'",'deploy/compose.yaml':b'image: autoblow-local:0.2.0-rc.2','go.mod':b'fixture','go.sum':b''}
+  files={'README.md':b'fixture','core/server.go':b'package core\nconst Version = "0.2.0-rc.2"\n','windows/Launcher.ps1':b"$v -eq '0.2.0-rc.2'",'deploy/compose.yaml':b'image: atbl-se:0.2.0-rc.2','go.mod':b'fixture','go.sum':b''}
   sha=lambda b:hashlib.sha256(b).hexdigest()
   for name,data in files.items():p=root/name;p.parent.mkdir(exist_ok=True);p.write_bytes(data)
   (root/'source.json').write_text(json.dumps([dict(path=n,sha256=sha(b)) for n,b in files.items()]))
@@ -16,7 +16,7 @@ class PackageReceiptTest(unittest.TestCase):
    data=('synthetic-not-executable:'+name).encode();(root/'build'/name).write_bytes(data);binaries[name]=dict(sha256=sha(data),bytes=len(data))
   receipt=dict(version='0.2.0-rc.2',sourceFiles={n:sha(b) for n,b in files.items() if n.startswith('core/') or n in ('go.mod','go.sum')},binaries=binaries)
   (root/'build/build-receipt.json').write_text(json.dumps(receipt));(root/'build/version.txt').write_text('0.2.0-rc.2');(root/'build/ca-certificates-copyright').write_text('fixture')
-  config=b'{}';tag='autoblow-local:0.2.0-rc.2'
+  config=b'{}';tag='atbl-se:0.2.0-rc.2'
   with tarfile.open(root/'build/image.tar','w') as tar:
    for name,data in [('config.json',config),('manifest.json',json.dumps([dict(Config='config.json',RepoTags=[tag])]).encode())]:
     info=tarfile.TarInfo(name);info.size=len(data);tar.addfile(info,io.BytesIO(data))

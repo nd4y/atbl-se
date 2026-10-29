@@ -29,7 +29,7 @@ for item in manifest:
 version = re.search(r'const Version = "([^"]+)"', sources['core/server.go'].decode()).group(1)
 assert args.build_dir.joinpath('version.txt').read_text().strip() == version
 assert "-eq '" + version + "'" in sources['windows/Launcher.ps1'].decode('utf-8-sig')
-assert 'autoblow-local:' + version in sources['deploy/compose.yaml'].decode()
+assert 'atbl-se:' + version in sources['deploy/compose.yaml'].decode()
 receipt = json.loads((args.build_dir / 'build-receipt.json').read_text())
 assert receipt['version'] == version, 'Build receipt version mismatch'
 required = {'autoblow-server','autoblow-catalog-import','autoblow-server.exe','autoblow-catalog-import.exe','AutoblowLocal.exe','ca-certificates.crt'}
@@ -59,7 +59,7 @@ artifacts = {}
 def package(kind, members):
     details = dict(base, files_sha256={name:sha(data) for name,data in sorted(members.items())})
     members = dict(members, **{'release-manifest.json':(json.dumps(details,indent=2)+'\n').encode()})
-    target = args.output_dir / ('autoblow-local-' + kind + '-' + version + '.zip')
+    target = args.output_dir / ('atbl-se-' + kind + '-' + version + '.zip')
     with zipfile.ZipFile(target,'x',zipfile.ZIP_DEFLATED) as archive:
         for name,data in sorted(members.items()): archive.writestr(name,data)
     with zipfile.ZipFile(target) as archive:

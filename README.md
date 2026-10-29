@@ -1,4 +1,6 @@
-# Autoblow Local
+# ATBL-SE
+
+**Autoblow Server Emulator**
 
 [Русский](README.ru.md)
 
@@ -37,6 +39,6 @@ The diagnostic panel uses a renewable session. External API clients own their ST
 - [Simulator, offline codec and research tools](docs/en/guide.md#developer-tools)
 - [Project passport and acceptance](docs/en/project.md)
 - [Contributing](CONTRIBUTING.md), [security reporting](SECURITY.md), [repository standard](docs/en/development-standard.md)
-- [Releases](https://github.com/nd4y/autoblow-local/releases) and [issues](https://github.com/nd4y/autoblow-local/issues)
+- [Releases](https://github.com/nd4y/atbl-se/releases) and [issues](https://github.com/nd4y/atbl-se/issues)
 
 No project-wide open-source license has been selected; see [LICENSE.md](LICENSE.md) and [third-party notices](THIRD_PARTY_NOTICES.md). No firmware images, video-library collection, account/session captures or production credentials are distributed here.

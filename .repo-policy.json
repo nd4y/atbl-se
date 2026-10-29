@@ -27,8 +27,8 @@
       "status": "NOT_VERIFIED"
     },
     "hostingEnforcement": {
-      "status": "FAIL",
-      "reference": "GitHub branch-protection API returned403 for the private repository; owner-only merge remains a written rule, not hosting enforcement"
+      "status": "NOT_VERIFIED",
+      "reference": "Public visibility and protected main are authorized; configure and read back hosting protection after publishing the named project"
     },
     "physical": {
       "status": "NOT_VERIFIED"

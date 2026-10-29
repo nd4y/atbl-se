@@ -34,8 +34,8 @@ func main() {
 	}
 	if err = cmd.Run(); err != nil {
 		user32 := syscall.NewLazyDLL("user32.dll")
-		msg, _ := syscall.UTF16PtrFromString("Autoblow Local could not start. Keep the windows folder next to the application and check Windows PowerShell availability.")
-		title, _ := syscall.UTF16PtrFromString("Autoblow Local")
+		msg, _ := syscall.UTF16PtrFromString("ATBL-SE could not start. Keep the windows folder next to the application and check Windows PowerShell availability.")
+		title, _ := syscall.UTF16PtrFromString("ATBL-SE")
 		user32.NewProc("MessageBoxW").Call(0, uintptr(unsafe.Pointer(msg)), uintptr(unsafe.Pointer(title)), 0x10)
 	}
 }

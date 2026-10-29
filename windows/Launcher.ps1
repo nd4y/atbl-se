@@ -9,7 +9,7 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 [Windows.Forms.Application]::EnableVisualStyles()
 $mutex=[Threading.Mutex]::new($false,'Local\AutoblowLocalLauncher')
-if(-not $mutex.WaitOne(0)){[Windows.Forms.MessageBox]::Show('Приложение уже запущено.','Autoblow Local') | Out-Null;exit 1}
+if(-not $mutex.WaitOne(0)){[Windows.Forms.MessageBox]::Show('Приложение уже запущено.','ATBL-SE') | Out-Null;exit 1}
 Startup-Stage 'launcher lock acquired'
 $script:server=$null;$script:hotspot=$null;$script:adapter=$null
 $script:address='';$script:headers=@{};$script:stopping=$false
@@ -32,7 +32,7 @@ function Stop-App {
  try {
   if($script:server -and -not $script:server.HasExited){
    Stop-LocalServer $script:server $serverData { [Windows.Forms.Application]::DoEvents(); Start-Sleep -Milliseconds 100 }
-   if($script:server.ExitCode -ne 0){[Windows.Forms.MessageBox]::Show('Сервер завершился с ошибкой. STOP мог быть не подтверждён: проверьте устройство.','Autoblow Local') | Out-Null}
+   if($script:server.ExitCode -ne 0){[Windows.Forms.MessageBox]::Show('Сервер завершился с ошибкой. STOP мог быть не подтверждён: проверьте устройство.','ATBL-SE') | Out-Null}
   }
   if($script:hotspot -and -not $script:hotspot.HasExited){[IO.File]::WriteAllText($hotspotStop,'stop');Wait-While {-not $script:hotspot.HasExited} 6;if(-not $script:hotspot.HasExited){throw 'Точка доступа ещё завершает работу.'}}
   $script:server=$null;$script:hotspot=$null;$status.Text='Сервер остановлен';$start.Enabled=$true;$stop.Enabled=$false;$open.Enabled=$false
@@ -90,9 +90,9 @@ function Start-App {
  }
 }
 
-$form=[Windows.Forms.Form]::new();$form.Text='Autoblow Local';$form.Size=[Drawing.Size]::new(640,650);$form.StartPosition='CenterScreen';$form.Font=[Drawing.Font]::new('Segoe UI',10);$form.FormBorderStyle='FixedDialog';$form.MaximizeBox=$false
+$form=[Windows.Forms.Form]::new();$form.Text='ATBL-SE';$form.Size=[Drawing.Size]::new(640,650);$form.StartPosition='CenterScreen';$form.Font=[Drawing.Font]::new('Segoe UI',10);$form.FormBorderStyle='FixedDialog';$form.MaximizeBox=$false
 function Label($text,$y){$c=[Windows.Forms.Label]::new();$c.Text=$text;$c.Location=[Drawing.Point]::new(24,$y);$c.Size=[Drawing.Size]::new(575,28);$form.Controls.Add($c);return $c}
-$title=Label 'Autoblow Local - запуск сервера' 20;$title.Font=[Drawing.Font]::new('Segoe UI',16)
+$title=Label 'ATBL-SE - запуск сервера' 20;$title.Font=[Drawing.Font]::new('Segoe UI',16)
 $null=Label 'Способ подключения' 68
 $mode=[Windows.Forms.ComboBox]::new();$mode.Location=[Drawing.Point]::new(24,98);$mode.Width=575;$mode.DropDownStyle='DropDownList';$mode.Items.AddRange(@('Домашняя сеть - роутер настраивается пользователем','Автономная точка доступа Windows (Wi-Fi Direct)'));$mode.SelectedIndex=0;$form.Controls.Add($mode)
 $null=Label 'Сетевой интерфейс для домашней сети' 138

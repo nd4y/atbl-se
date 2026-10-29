@@ -76,7 +76,7 @@ func main() {
 	if err = s.Start(); err != nil {
 		fatal(err)
 	}
-	fmt.Printf("Autoblow Local %s ready; UI http://%s; local authorization file: %s/control-token\n", core.Version, s.Address(), cfg.DataDir)
+	fmt.Printf("ATBL-SE %s ready; UI http://%s; local authorization file: %s/control-token\n", core.Version, s.Address(), cfg.DataDir)
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 	select {

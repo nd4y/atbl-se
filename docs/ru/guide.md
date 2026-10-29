@@ -2,6 +2,8 @@
 
 [English](../en/guide.md) | [README](../../README.ru.md)
 
+Название проекта - ATBL-SE. Пути команд, имена исполняемых файлов и каталог `%LOCALAPPDATA%/AutoblowLocal` сохраняют прежние технические имена для совместимости; переименование проекта не переносит и не удаляет данные.
+
 ## Установка и сеть
 
 Во время работы облако не требуется. До отключения WAN заранее получите бинарники, Docker-образ и конфигурацию. Не открывайте порты устройства и API в интернет. Ограничивайте DNS/NAT целевым устройством и сохраняйте отдельный доступ к роутеру для отката.
@@ -21,7 +23,7 @@ GOOS=windows GOARCH=amd64 go build -ldflags="-H windowsgui" -o out/windows/Autob
 
 ### Docker на NAS
 
-Соберите Linux-сервер в отдельном контексте с `deploy/Dockerfile` и `/etc/ssl/certs/ca-certificates.crt`, затем образ `autoblow-local:0.2.0-rc.2`. В scratch-образе находятся исполняемый файл и доверенные CA. Сохраните его через `docker save` и перенесите архив для автономного `docker load`.
+Соберите Linux-сервер в отдельном контексте с `deploy/Dockerfile` и `/etc/ssl/certs/ca-certificates.crt`, затем образ `atbl-se:0.2.0-rc.2`. В scratch-образе находятся исполняемый файл и доверенные CA. Сохраните его через `docker save` и перенесите архив для автономного `docker load`.
 
 Задайте `AUTOBLOW_DATA_DIR` и `AUTOBLOW_CONFIG_DIR` как приватные абсолютные пути. Скопируйте во второй каталог `deploy/server.example.json` с именем `server.json`. UID/GID 65532 нужны запись в данные и чтение конфигурации. `deploy/compose.yaml` задаёт `pull_policy: never`, `restart: no`, read-only корень, 96 MiB и отсутствие дополнительных capabilities. Порт TLS хоста 20445 соответствует 20443 контейнера, API 20881 - 20880. Публикация репозитория ничего не устанавливает и не запускает на NAS.
 

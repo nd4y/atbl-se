@@ -1,6 +1,6 @@
 services:
   emulator:
-    image: autoblow-local:0.2.0-rc.2
+    image: atbl-se:0.2.0-rc.2
     pull_policy: never
     restart: "no"
     init: false

@@ -1,4 +1,6 @@
-# Autoblow Local
+# ATBL-SE
+
+**Autoblow Server Emulator**
 
 [English](README.md)
 
@@ -37,6 +39,6 @@ go build -o out/vacuglide-simulator ./cmd/vacuglide-simulator
 - [Симулятор, автономный кодек и инструменты анализа](docs/ru/guide.md#инструменты-разработки)
 - [Паспорт проекта и приёмка](docs/ru/project.md)
 - [Внесение изменений](CONTRIBUTING.ru.md), [сообщения об уязвимостях](SECURITY.ru.md), [стандарт репозитория](docs/ru/development-standard.md)
-- [Релизы](https://github.com/nd4y/autoblow-local/releases) и [задачи](https://github.com/nd4y/autoblow-local/issues)
+- [Релизы](https://github.com/nd4y/atbl-se/releases) и [задачи](https://github.com/nd4y/atbl-se/issues)
 
 Общая открытая лицензия проекта пока не выбрана; см. [LICENSE.md](LICENSE.md) и [уведомления о сторонних компонентах](THIRD_PARTY_NOTICES.md). Образы прошивок, собранная видеотека, захваты аккаунтов/сессий и рабочие учётные данные сюда не входят.
