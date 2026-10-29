@@ -1,8 +1,8 @@
 package core
 
 import (
-	"autoblow.local/emulator/internal/protocol"
 	"encoding/binary"
+	"github.com/nd4y/atblse/internal/protocol"
 	"strings"
 	"testing"
 	"time"

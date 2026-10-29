@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 func isImplementedLocalRoute(key string) bool {

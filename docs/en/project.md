@@ -2,7 +2,7 @@
 
 [Русский](../ru/project.md)
 
-**Product:** standalone offline device-control service and diagnostic panel, candidate 0.2.0-rc.2; experimental lifecycle. Audience: owners of stock VacuGlide 2 and developers of compatible clients.
+**Product:** standalone offline device-control service and diagnostic panel, candidate 0.2.0-rc.3; experimental lifecycle. Audience: owners of stock VacuGlide 2 and developers of compatible clients.
 
 | Journey                  | Expected result                                            | Acceptance                                                                       |
 | ------------------------ | ---------------------------------------------------------- | -------------------------------------------------------------------------------- |

@@ -31,6 +31,21 @@ jobs:
           node-version: 24.18.0
       - name: Install pinned checker dependencies
         run: npm ci --prefix .standards --ignore-scripts --no-audit --no-fund
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: 1.27.3
+          cache: false
+      - name: Check native Go formatting
+        shell: bash
+        run: |
+          set -euo pipefail
+          files="$(gofmt -l core internal cmd)"
+          if [[ -n "$files" ]]; then
+            printf '%s\n' "$files"
+            exit 1
+          fi
+      - name: Check product metadata and documentation links
+        run: node scripts/check-project.mjs
       - name: Install checksum-verified Gitleaks
         run: node .standards/install-gitleaks.mjs
       - name: Check complete proposed change

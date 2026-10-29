@@ -2,7 +2,7 @@
 
 [Русский](../ru/guide.md) | [README](../../README.md)
 
-The project is named ATBL-SE. Existing command paths, executable filenames and the `%LOCALAPPDATA%/AutoblowLocal` state directory retain their compatibility names; changing the project name does not move or erase data.
+All project-owned commands, binaries, packages and environment variables now use `atblse`. See the [migration and recovery guide](migration.md) before replacing an earlier build. Official API routes, firmware identifiers and upstream SDK names remain unchanged.
 
 ## Installation and network
 
@@ -13,19 +13,19 @@ The runtime has no cloud dependency. Preload binaries, Docker images and configu
 Build the two entry points and keep `windows/` next to them:
 
 ```sh
-GOOS=windows GOARCH=amd64 go build -o out/windows/autoblow-server.exe ./cmd/autoblow-server
-GOOS=windows GOARCH=amd64 go build -ldflags="-H windowsgui" -o out/windows/AutoblowLocal.exe ./cmd/autoblow-windows
+GOOS=windows GOARCH=amd64 go build -o out/windows/atblse-server.exe ./cmd/atblse-server
+GOOS=windows GOARCH=amd64 go build -ldflags="-H windowsgui" -o out/windows/atblse.exe ./cmd/atblse-windows
 ```
 
-Copy `windows/` and `docs/` into `out/windows/`; launch `AutoblowLocal.exe`. The wrapper uses Windows PowerShell 5.1, .NET Framework and WinRT. It does not need Python, WSL or Docker Desktop. Select the autonomous access point or the router-assisted LAN mode. A hotspot needs a compatible Wi-Fi Direct adapter; initial provisioning and DHCP/DNS need physical acceptance. Connect the device to the displayed Wi-Fi through its normal setup. Returning to the original network requires its normal provisioning again.
+Copy `windows/` and `docs/` into `out/windows/`; launch `atblse.exe`. The wrapper uses Windows PowerShell 5.1, .NET Framework and WinRT. It does not need Python, WSL or Docker Desktop. Select the autonomous access point or the router-assisted LAN mode. A hotspot needs a compatible Wi-Fi Direct adapter; initial provisioning and DHCP/DNS need physical acceptance. Connect the device to the displayed Wi-Fi through its normal setup. Returning to the original network requires its normal provisioning again.
 
-Data and hotspot credentials live under `%LOCALAPPDATA%/AutoblowLocal`. Do not publish that directory. Optional `control-options.json` uses the server fields `compatibilityControl`, `experimentalSyncScripts`, `experimentalLocalScripts`, `maxSpeed` and `scriptURLOrigins`. Stop the application before editing. Successful shutdown first verifies the owned server process, then removes its hotspot. If process exit cannot be confirmed, the wrapper retains the connection and exposes STOP for recovery.
+The launcher copies and verifies legacy data before publishing the new directory. Data and hotspot credentials live under `%LOCALAPPDATA%/atblse`. Do not publish that directory. Optional `control-options.json` uses the server fields `compatibilityControl`, `experimentalSyncScripts`, `experimentalLocalScripts`, `maxSpeed` and `scriptURLOrigins`. Stop the application before editing. Successful shutdown first verifies the owned server process, then removes its hotspot. If process exit cannot be confirmed, the wrapper retains the connection and exposes STOP for recovery.
 
 ### NAS Docker
 
-Build the Linux server into an isolated image context with `deploy/Dockerfile` and `/etc/ssl/certs/ca-certificates.crt`, then build/tag `atbl-se:0.2.0-rc.2`. The scratch image contains the executable and CA roots. Save it with `docker save` and transfer the archive for an offline `docker load`.
+Build the Linux server into an isolated image context with `deploy/Dockerfile` and `/etc/ssl/certs/ca-certificates.crt`, then build/tag `atblse:0.2.0-rc.3`. The scratch image contains the executable and CA roots. Save it with `docker save` and transfer the archive for an offline `docker load`.
 
-Set `AUTOBLOW_DATA_DIR` and `AUTOBLOW_CONFIG_DIR` to private absolute directories. Copy `deploy/server.example.json` to the latter as `server.json`. UID/GID 65532 needs write access to data and read access to config. `deploy/compose.yaml` uses `pull_policy: never`, `restart: no`, read-only root, 96 MiB and no additional capabilities. It maps host TLS port 20445 to container 20443 and API 20881 to 20880. Nothing is installed or started by publishing this repository.
+Set `ATBLSE_DATA_DIR` and `ATBLSE_CONFIG_DIR` to private absolute directories. Copy `deploy/server.example.json` to the latter as `server.json`. UID/GID 65532 needs write access to data and read access to config. `deploy/compose.yaml` uses `pull_policy: never`, `restart: no`, read-only root, 96 MiB and no additional capabilities. It maps host TLS port 20445 to container 20443 and API 20881 to 20880. Nothing is installed or started by publishing this repository.
 
 ### Router and DNS choices
 
@@ -61,7 +61,7 @@ Binary files have an eight-byte little-endian header (script ID, format marker 1
 
 ## Developer tools
 
-- `cmd/vacuglide-simulator`: loopback-only WSS client with TLS verification, synthetic MAC and bounded downloads. `--lab --duration 10m` creates an isolated server. For a separately configured local server use `--url wss://127.0.0.1:20443/device-backend/ws --ca local-server.crt`. No insecure TLS switch, external endpoint or real credential is needed.
+- `cmd/atblse-simulator`: loopback-only WSS client with TLS verification, synthetic MAC and bounded downloads. `--lab --duration 10m` creates an isolated server. For a separately configured local server use `--url wss://127.0.0.1:20443/device-backend/ws --ca local-server.crt`. No insecure TLS switch, external endpoint or real credential is needed.
 - `internal/simulator`: manual/valve/local/sync/slot protocol model. It reports requested state, does not schedule real-time playback, model a motor, emulate flash or accept OTA. `research/vacuglide_tick_model.py` is a separate offline timing model.
 - `research/vacuglide_binary.py`: lossless binary decode/encode and candidate Funscript conversion. Example: `python research/vacuglide_binary.py decode input.bin output.json --csv analysis.csv`. Outputs must not exist already.
 - `research/inspect_esp_image.py` and `research/ghidra/`: bounded static image inspection and Ghidra export scripts. Supply your own image; these do not flash a device. No vendor image is bundled.
@@ -79,9 +79,11 @@ python scripts/test_package_release.py -v
 node scripts/panel-contracts.mjs
 python scripts/prepare-client-contracts.py
 npm ci --prefix out/clients-integration --ignore-scripts --no-audit --no-fund
-AUTOBLOW_TEST_NODE=$(command -v node) AUTOBLOW_TEST_CLIENTS="$PWD/out/clients-integration" go test -race -tags integration ./core
+ATBLSE_TEST_NODE=$(command -v node) ATBLSE_TEST_CLIENTS="$PWD/out/clients-integration" go test -race -tags integration ./core
 ```
 
 Node 24.18.0 supports the pinned TypeScript adapter harness; SDK version 2.6.0 is locked. The bundled adapter snapshot is an interoperability fixture; a live Studio install is a separate acceptance path. Dependency bootstrap needs internet or a prefilled cache, while tests and the built runtime can operate offline.
 
 Use `node .standards/check.mjs staged` before committing. The owner uses an isolated build host for heavy operations; public PRs must never execute on a private runner automatically. GitHub's `repository-standard` job is a public, read-only tooling gate. The `software-verification` status identifies the exact source checked on the isolated build host; it is separate from physical acceptance.
+
+Additional source checks: `node scripts/check-project.mjs` verifies versions and documentation links; `node scripts/test-standard-adoption.mjs` exercises the installed pinned checker in a disposable repository, including synthetic-secret rejection. Windows-only isolated tests: `powershell.exe -NoProfile -File scripts/test-state-migration.ps1` and `powershell.exe -NoProfile -File scripts/test-server-lifecycle.ps1`. These scripts use temporary state and mocks; they do not start the hotspot or touch a device.

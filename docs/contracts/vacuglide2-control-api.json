@@ -1,6 +1,6 @@
 {
   "scope": "VacuGlide2 control API for external applications; excludes cloud accounts/content/AI and OTA",
-  "current_version": "0.2.0-rc.2",
+  "current_version": "0.2.0-rc.3",
   "sdk_version": "2.6.0",
   "full_compatibility": false,
   "physical_device_accepted": false,
@@ -152,6 +152,12 @@
       "status": "implemented-firmware-static-offline-tested"
     }
   ],
-  "policy_differences": {},
+  "policy_differences": {
+    "control": "local pairing and explicit compatibility/script opt-in; panel lease is separate from external-client STOP",
+    "limits": "32 ordinary HTTP handlers, two uploads, 32 event subscribers; overload returns 429; STOP bypasses ordinary/upload admission",
+    "credentials": "device token and its SSE connection expire on device disconnect; independent local key retains offline access",
+    "storage": "bounded local stores; atomic state commits; native script playback requires maxSpeed 100",
+    "network": "script URL fetches require explicit origins; no redirects; no OTA"
+  },
   "acceptance": "Source/virtual protocol tests do not establish physical acceptance; see docs/en/project.md and docs/ru/project.md"
 }

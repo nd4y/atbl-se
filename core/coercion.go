@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 var jsDecimal = regexp.MustCompile(`^[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?$`)

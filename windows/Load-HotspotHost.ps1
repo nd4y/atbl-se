@@ -10,7 +10,7 @@ foreach($assembly in @('System.Runtime','System.Threading.Tasks','System.Runtime
 }
 $source=Join-Path $PSScriptRoot 'HotspotHost.cs'
 $hash=(Get-FileHash -LiteralPath $source -Algorithm SHA256).Hash.Substring(0,16)
-$cache=Join-Path $env:LOCALAPPDATA 'AutoblowLocal\interop'
+$cache=Join-Path $env:LOCALAPPDATA 'atblse\interop'
 [IO.Directory]::CreateDirectory($cache) | Out-Null
 $dll=Join-Path $cache ('hotspot-'+$hash+'.dll')
 if(-not (Test-Path -LiteralPath $dll)) {

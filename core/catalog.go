@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"strings"
 
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 type catalogRecord struct {
@@ -99,7 +99,7 @@ func ImportLocalScript(dataDir, uuid string, data []byte) error {
 	count := 0
 	existing := false
 	for _, f := range files {
-		if strings.HasSuffix(f.Name(), ".json") {
+		if strings.HasSuffix(f.Name(), ".json") || strings.HasPrefix(f.Name(), ".pending-") {
 			count++
 		}
 		if f.Name() == uuid+".json" {
@@ -114,22 +114,7 @@ func ImportLocalScript(dataDir, uuid string, data []byte) error {
 	if err != nil {
 		return err
 	}
-	f, err := os.CreateTemp(dir, ".pending-")
-	if err != nil {
-		return err
-	}
-	defer os.Remove(f.Name())
-	if _, err = f.Write(raw); err == nil {
-		err = f.Sync()
-	}
-	closeErr := f.Close()
-	if err == nil {
-		err = closeErr
-	}
-	if err != nil {
-		return err
-	}
-	return os.Rename(f.Name(), filepath.Join(dir, uuid+".json"))
+	return writeStateFile(filepath.Join(dir, uuid+".json"), raw, true)
 }
 
 func readLocalCatalog(dataDir, uuid string) (localReplacement, error) {

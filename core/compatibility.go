@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 func isCompatibilityPath(path string) bool {
@@ -93,7 +93,7 @@ func (s *Server) serveCompatibility(w http.ResponseWriter, r *http.Request) {
 	}
 	s.mu.Unlock()
 	local := subtle.ConstantTimeCompare([]byte(token), []byte(s.token)) == 1
-	device := subtle.ConstantTimeCompare(digest[:], deviceHash[:]) == 1
+	device := d != nil && subtle.ConstantTimeCompare(digest[:], deviceHash[:]) == 1
 	if token == "" || !local && !device {
 		compatibilityError(w, 401, "UNAUTHORIZED", "valid x-device-token required")
 		return
@@ -104,7 +104,7 @@ func (s *Server) serveCompatibility(w http.ResponseWriter, r *http.Request) {
 	}
 	key := r.Method + " " + r.URL.Path
 	if key == "GET /events/stream" {
-		s.serveDeviceEvents(w, r, token)
+		s.serveDeviceEvents(w, r, token, d, local)
 		return
 	}
 	if key == "GET /cluster/time" {

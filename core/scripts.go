@@ -20,7 +20,7 @@ import (
 	"sync"
 	"time"
 
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 const maxScriptBytes = 4 << 20
@@ -87,7 +87,7 @@ func (store *scriptStore) put(actions []protocol.SyncAction) (string, scriptData
 	}
 	count := 0
 	for _, f := range files {
-		if strings.HasSuffix(f.Name(), ".json") {
+		if strings.HasSuffix(f.Name(), ".json") || strings.HasPrefix(f.Name(), ".pending-") {
 			count++
 		}
 	}
@@ -107,21 +107,7 @@ func (store *scriptStore) put(actions []protocol.SyncAction) (string, scriptData
 	if err != nil {
 		return "", data, err
 	}
-	temp, err := os.CreateTemp(store.dir, ".pending-")
-	if err != nil {
-		return "", data, err
-	}
-	defer os.Remove(temp.Name())
-	if _, err = temp.Write(record); err == nil {
-		err = temp.Sync()
-	}
-	closeErr := temp.Close()
-	if err == nil {
-		err = closeErr
-	}
-	if err == nil {
-		err = os.Rename(temp.Name(), filepath.Join(store.dir, token+".json"))
-	}
+	err = writeStateFile(filepath.Join(store.dir, token+".json"), record, false)
 	return token, data, err
 }
 
@@ -299,6 +285,13 @@ func (s *Server) serveSyncScript(w http.ResponseWriter, r *http.Request, d *Devi
 	var numeric *wireNumber
 	switch operation {
 	case "upload-funscript", "upload-csv", "upload-funscript-url", "upload-csv-url":
+		select {
+		case s.uploadSlots <- struct{}{}:
+			defer func() { <-s.uploadSlots }()
+		default:
+			compatibilityError(w, 429, "SCRIPT_UPLOAD_CAPACITY", "at most two script uploads may be active")
+			return
+		}
 		var actions []protocol.SyncAction
 		if strings.HasSuffix(operation, "-url") {
 			var body struct {

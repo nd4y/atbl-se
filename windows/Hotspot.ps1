@@ -15,7 +15,7 @@ try {
  if($cfg.password.Length -lt 8 -or $cfg.password.Length -gt 63 -or $cfg.password -notmatch '^[\x20-\x7e]+$'){throw 'Use an ASCII password of 8..63 characters'}
  $active=@(Get-NetAdapter -IncludeHidden | Where-Object {$_.InterfaceDescription -like '*Wi-Fi Direct*' -and $_.Status -eq 'Up'})
  if($active.Count){throw 'Another Wi-Fi Direct connection or Mobile Hotspot is active. Stop it before starting this application.'}
- $publisher=[AutoblowLocal.HotspotHost]::new()
+ $publisher=[atblse.HotspotHost]::new()
  if($Probe){Save-State @{status='interop-ready'};return}
  $publisher.Start($cfg.ssid,$cfg.password)
  $deadline=[DateTime]::UtcNow.AddSeconds(15);$ip=$null;$adapter=$null

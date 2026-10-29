@@ -28,7 +28,7 @@ import (
 	"time"
 )
 
-const Version = "0.2.0-rc.2"
+const Version = "0.2.0-rc.3"
 
 //go:embed web/*
 var web embed.FS
@@ -71,6 +71,8 @@ type Server struct {
 	closing         bool
 	events          *eventHub
 	scripts         *scriptStore
+	uploadSlots     chan struct{}
+	requestSlots    chan struct{}
 	scriptURLs      *scriptFetcher
 }
 
@@ -97,27 +99,34 @@ func New(cfg Config) (*Server, error) {
 	if err := os.MkdirAll(cfg.DataDir, 0700); err != nil {
 		return nil, err
 	}
-	s := &Server{cfg: cfg, shutdown: make(chan struct{}), events: newEventHub(), scriptURLs: fetcher}
+	s := &Server{cfg: cfg, shutdown: make(chan struct{}), events: newEventHub(), scriptURLs: fetcher, uploadSlots: make(chan struct{}, 2), requestSlots: make(chan struct{}, 32)}
 	s.scripts = &scriptStore{dir: filepath.Join(cfg.DataDir, "sync-scripts")}
 	p := filepath.Join(cfg.DataDir, "control-token")
-	data, err := os.ReadFile(p)
+	data, err := readSmallState(p, 128)
 	if os.IsNotExist(err) {
 		b := make([]byte, 32)
 		if _, err = rand.Read(b); err != nil {
 			return nil, err
 		}
 		data = []byte(hex.EncodeToString(b))
-		err = os.WriteFile(p, data, 0600)
+		err = writeStateFile(p, data, false)
+		if os.IsExist(err) {
+			data, err = readSmallState(p, 128)
+		}
 	}
 	if err != nil {
 		return nil, err
 	}
 	s.token = strings.TrimSpace(string(data))
-	if len(s.token) != 64 {
-		return nil, errors.New("invalid control-token file")
+	decoded, decodeErr := hex.DecodeString(s.token)
+	if decodeErr != nil || len(decoded) != 32 {
+		return nil, errors.New("invalid control-token file; stop the server and restore a known-good backup, or remove only this file to revoke and regenerate the key")
 	}
-	if b, e := os.ReadFile(filepath.Join(cfg.DataDir, "paired-device")); e == nil {
+	if b, e := readSmallState(filepath.Join(cfg.DataDir, "paired-device"), 32); e == nil {
 		s.paired = strings.TrimSpace(string(b))
+		if !macPattern.MatchString(s.paired) {
+			return nil, errors.New("invalid paired-device file; stop the server and restore a known-good backup or remove only this file to pair again")
+		}
 	} else if !os.IsNotExist(e) {
 		return nil, e
 	}
@@ -152,8 +161,8 @@ func (s *Server) Start() error {
 			return err
 		}
 	}
-	s.deviceHTTP = &http.Server{Handler: http.HandlerFunc(s.acceptDevice), ReadHeaderTimeout: 5 * time.Second, MaxHeaderBytes: 16 * 1024}
-	s.api = &http.Server{Handler: http.HandlerFunc(s.serveAPI), ReadHeaderTimeout: 5 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}
+	s.deviceHTTP = &http.Server{Handler: s.boundedHTTP(s.acceptDevice), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 16 * 1024}
+	s.api = &http.Server{Handler: s.boundedHTTP(s.serveAPI), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, IdleTimeout: 30 * time.Second, MaxHeaderBytes: 8192}
 	go s.deviceHTTP.Serve(s.deviceListener)
 	go s.api.Serve(s.apiListener)
 	return nil
@@ -292,7 +301,7 @@ func (s *Server) serveAPI(w http.ResponseWriter, r *http.Request) {
 			fail(w, 409, errors.New("another device is paired"))
 			return
 		}
-		err := os.WriteFile(filepath.Join(s.cfg.DataDir, "paired-device"), []byte(d.mac), 0600)
+		err := writeStateFile(filepath.Join(s.cfg.DataDir, "paired-device"), []byte(d.mac), true)
 		if err == nil {
 			s.paired = d.mac
 		}

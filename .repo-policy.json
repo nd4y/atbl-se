@@ -4,7 +4,17 @@
   "kind": "product",
   "lifecycle": "experiment",
   "adoption": "adopting",
-  "profiles": ["web", "cli", "service", "network", "integration", "firmware", "docs"],
+  "profiles": [
+    "web",
+    "cli",
+    "library",
+    "service",
+    "network",
+    "integration",
+    "data",
+    "firmware",
+    "docs"
+  ],
   "docs": {
     "mode": "strict",
     "readmes": ["README.md", "README.ru.md"],
@@ -28,10 +38,14 @@
     },
     "hostingEnforcement": {
       "status": "NOT_VERIFIED",
-      "reference": "Public visibility and protected main are authorized; configure and read back hosting protection after publishing the named project"
+      "reference": "Recheck protections after repository rename; current review: docs/en/review-2026-10-29.md"
     },
     "physical": {
       "status": "NOT_VERIFIED"
+    },
+    "review": {
+      "status": "NOT_VERIFIED",
+      "reference": "docs/en/review-2026-10-29.md; required checks on the exact PR revision remain authoritative"
     }
   }
 }

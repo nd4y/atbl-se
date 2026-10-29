@@ -158,4 +158,21 @@ let checks = 0;
     await Promise.allSettled([old, next]);
   }
 }
+{
+  let offline = false;
+  const p = await panel(async () => {
+    if (offline) throw new Error("synthetic network loss");
+    return { code: 200, body: ready };
+  });
+  offline = true;
+  await p.eval("refresh()");
+  assert.match(p.$("connection").textContent, /устарели/);
+  assert.equal(p.$("start").disabled, true);
+  assert.equal(p.$("pair").hidden, true);
+  offline = false;
+  await p.eval("refresh()");
+  assert.equal(p.$("connection").textContent, "Устройство подключено");
+  assert.equal(p.$("start").disabled, false);
+  checks++;
+}
 console.log(JSON.stringify({ panelRaceAndAuthChecks: checks, physicalDevice: false }));

@@ -1,7 +1,7 @@
 package core
 
 import (
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 	"net/http"
 	"strings"
 	"testing"

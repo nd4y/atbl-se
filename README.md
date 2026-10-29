@@ -1,4 +1,4 @@
-# ATBL-SE
+# atblse
 
 **Autoblow Server Emulator**
 
@@ -13,24 +13,26 @@ Run a stock VacuGlide 2 through a local server, with a diagnostic panel and an A
 - Manual speed and valves, 30 local slots, Funscript/CSV conversion, script transfer, seeking, looping and events.
 - A standalone virtual device and an isolated loopback lab for development without hardware.
 
-**Candidate 0.2.0-rc.2.** The firmware profile is VacuGlide 2 `1.03`/`1.0.3`. Software tests are separate from physical acceptance. This candidate still needs real-device, Windows Hotspot and network/power-loss acceptance. AI Ultra, cloud accounts, video services and firmware updates are outside this product.
+**Candidate 0.2.0-rc.3.** The firmware profile is VacuGlide 2 `1.03`/`1.0.3`. Software tests are separate from physical acceptance. This candidate still needs real-device, Windows Hotspot and network/power-loss acceptance. AI Ultra, cloud accounts, video services and firmware updates are outside this product.
+
+The `atblse` rename includes executable names, the Go module and `ATBLSE_*` configuration variables. The Windows launcher copies existing data without deleting the old directory. Follow [migration and key recovery](docs/en/migration.md); the [standard review](docs/en/review-2026-10-29.md) separates software evidence from remaining release gates.
 
 ## Try the local lab
 
 With Go 1.24 or later (verification uses Go 1.27.3):
 
 ```sh
-go build -o out/vacuglide-simulator ./cmd/vacuglide-simulator
-./out/vacuglide-simulator --lab --duration 10m
+go build -o out/atblse-simulator ./cmd/atblse-simulator
+./out/atblse-simulator --lab --duration 10m
 ```
 
-On Windows, build with `-o out/vacuglide-simulator.exe` and run that file. The command prints a temporary panel URL, local control key and synthetic MAC. Open the URL, enter the key, and pair the displayed virtual device. Nothing is sent to the official service. The lab removes its temporary state when it exits normally.
+On Windows, build with `-o out/atblse-simulator.exe` and run that file. The command prints a temporary panel URL, local control key and synthetic MAC. Open the URL, enter the key, and pair the displayed virtual device. Nothing is sent to the official service. The lab removes its temporary state when it exits normally.
 
 Development dependencies must be obtained before an offline build. The compiled application does not download them at startup. The current panel and Windows shell use Russian labels.
 
 ## Use the server
 
-Build `./cmd/autoblow-server`, prepare a private configuration from `deploy/server.example.json`, and follow the [installation and API guide](docs/en/guide.md). Keep the API private. The default maximum speed is 15%; script playback and external-client control need explicit configuration.
+Build `./cmd/atblse-server`, prepare a private configuration from `deploy/server.example.json`, and follow the [installation and API guide](docs/en/guide.md). Keep the API private. The default maximum speed is 15%; script playback and external-client control need explicit configuration.
 
 The diagnostic panel uses a renewable session. External API clients own their STOP behavior. Disconnecting the server cannot prove a motor has physically stopped, and the server never resumes a previous run automatically.
 
@@ -39,6 +41,6 @@ The diagnostic panel uses a renewable session. External API clients own their ST
 - [Simulator, offline codec and research tools](docs/en/guide.md#developer-tools)
 - [Project passport and acceptance](docs/en/project.md)
 - [Contributing](CONTRIBUTING.md), [security reporting](SECURITY.md), [repository standard](docs/en/development-standard.md)
-- [Releases](https://github.com/nd4y/atbl-se/releases) and [issues](https://github.com/nd4y/atbl-se/issues)
+- [Releases](https://github.com/nd4y/atblse/releases) and [issues](https://github.com/nd4y/atblse/issues)
 
 No project-wide open-source license has been selected; see [LICENSE.md](LICENSE.md) and [third-party notices](THIRD_PARTY_NOTICES.md). No firmware images, video-library collection, account/session captures or production credentials are distributed here.

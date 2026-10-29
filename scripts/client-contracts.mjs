@@ -3,9 +3,9 @@ import assert from "node:assert/strict";
 import { pathToFileURL } from "node:url";
 import path from "node:path";
 
-const base = process.env.AUTOBLOW_TEST_BASE;
-const token = process.env.AUTOBLOW_TEST_TOKEN;
-const clients = process.env.AUTOBLOW_TEST_CLIENTS;
+const base = process.env.ATBLSE_TEST_BASE;
+const token = process.env.ATBLSE_TEST_TOKEN;
+const clients = process.env.ATBLSE_TEST_CLIENTS;
 assert(base && token && clients, "contract harness environment missing");
 const originalFetch = globalThis.fetch;
 let requests = 0;
@@ -120,15 +120,12 @@ assert.equal(
 assert.equal((await studio.send({ kind: "syncStop" })).state.operationalMode, "SYNC_SCRIPT_PAUSED");
 await vacuglide.targetSpeedStop();
 assert.equal(
-  (
-    await vacuglide.syncScriptUploadFunscriptUrl(
-      process.env.AUTOBLOW_TEST_SCRIPT_SOURCE + "/script",
-    )
-  ).operationalMode,
+  (await vacuglide.syncScriptUploadFunscriptUrl(process.env.ATBLSE_TEST_SCRIPT_SOURCE + "/script"))
+    .operationalMode,
   "SYNC_SCRIPT_PAUSED",
 );
 assert.equal(
-  (await vacuglide.syncScriptUploadCsvUrl(process.env.AUTOBLOW_TEST_SCRIPT_SOURCE + "/csv"))
+  (await vacuglide.syncScriptUploadCsvUrl(process.env.ATBLSE_TEST_SCRIPT_SOURCE + "/csv"))
     .operationalMode,
   "SYNC_SCRIPT_PAUSED",
 );
@@ -144,11 +141,8 @@ assert.equal(moved[1], slotsBefore[29]);
 const replaced = await vacuglide.localScriptReplace(1, uploaded.syncScriptToken);
 assert.equal(replaced.length, 30);
 assert(Number.isInteger(replaced[1]) && replaced[1] > 0 && replaced[1] <= 0xffffffff);
-assert(process.env.AUTOBLOW_TEST_CATALOG_UUID, "catalog fixture required");
-const catalogReplaced = await vacuglide.localScriptReplace(
-  0,
-  process.env.AUTOBLOW_TEST_CATALOG_UUID,
-);
+assert(process.env.ATBLSE_TEST_CATALOG_UUID, "catalog fixture required");
+const catalogReplaced = await vacuglide.localScriptReplace(0, process.env.ATBLSE_TEST_CATALOG_UUID);
 assert.equal(catalogReplaced[0], 1, "original catalog identity was lost");
 assert.equal((await vacuglide.getState()).operationalMode, "LOCAL_SCRIPT_PAUSED");
 await vacuglide.targetSpeedStop();

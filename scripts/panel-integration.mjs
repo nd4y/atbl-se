@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import vm from "node:vm";
-const base = process.env.AUTOBLOW_TEST_BASE,
-  token = process.env.AUTOBLOW_TEST_TOKEN;
+const base = process.env.ATBLSE_TEST_BASE,
+  token = process.env.ATBLSE_TEST_TOKEN;
 assert(base && token);
 const html = await (await fetch(base + "/")).text();
 const nodes = new Map(

@@ -10,7 +10,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"autoblow.local/emulator/internal/protocol"
+	"github.com/nd4y/atblse/internal/protocol"
 )
 
 // Offline script identities belong to our local library, not the cloud catalog.

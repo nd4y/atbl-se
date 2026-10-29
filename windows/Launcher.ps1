@@ -1,22 +1,34 @@
 ﻿param([switch]$Smoke)
 $ErrorActionPreference='Stop'
-$startupLog=Join-Path $env:LOCALAPPDATA 'AutoblowLocal\launcher-startup.log'
-[IO.Directory]::CreateDirectory((Split-Path -Parent $startupLog)) | Out-Null
-function Startup-Stage($stage){[IO.File]::AppendAllText($startupLog,([DateTime]::UtcNow.ToString('o')+' '+$stage+[Environment]::NewLine))}
-trap {Startup-Stage ('error: '+$_.Exception.Message);throw $_}
-Startup-Stage 'loading forms'
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 [Windows.Forms.Application]::EnableVisualStyles()
-$mutex=[Threading.Mutex]::new($false,'Local\AutoblowLocalLauncher')
-if(-not $mutex.WaitOne(0)){[Windows.Forms.MessageBox]::Show('Приложение уже запущено.','ATBL-SE') | Out-Null;exit 1}
-Startup-Stage 'launcher lock acquired'
+function Acquire-LauncherMutex([string]$Name){
+ $value=[Threading.Mutex]::new($false,$Name)
+ try{$acquired=$value.WaitOne(0)}catch [Threading.AbandonedMutexException]{$acquired=$true}
+ if(-not $acquired){$value.Dispose();throw 'Another current or legacy launcher is already running.'}
+ return $value
+}
+$legacyMutex=$null;$mutex=$null
+try{
+ # Compatibility guard prevents the old launcher from writing the source copy.
+ $legacyMutex=Acquire-LauncherMutex 'Local\AutoblowLocalLauncher'
+ $mutex=Acquire-LauncherMutex 'Local\atblseLauncher'
+ . (Join-Path $PSScriptRoot 'StateMigration.ps1')
+ $data=Initialize-AtblseData $env:LOCALAPPDATA
+}catch{
+ if($mutex){$mutex.ReleaseMutex();$mutex.Dispose()}
+ if($legacyMutex){$legacyMutex.ReleaseMutex();$legacyMutex.Dispose()}
+ throw
+}
+$startupLog=Join-Path $data 'launcher-startup.log'
+function Startup-Stage($stage){[IO.File]::AppendAllText($startupLog,([DateTime]::UtcNow.ToString('o')+' '+$stage+[Environment]::NewLine))}
+trap {Startup-Stage ('error: '+$_.Exception.Message);throw $_}
+Startup-Stage 'launcher locks acquired; state ready'
 $script:server=$null;$script:hotspot=$null;$script:adapter=$null
 $script:address='';$script:headers=@{};$script:stopping=$false
 $root=Split-Path -Parent $PSScriptRoot
-$serverPath=Join-Path $root 'autoblow-server.exe'
-$data=Join-Path $env:LOCALAPPDATA 'AutoblowLocal'
-[IO.Directory]::CreateDirectory($data) | Out-Null
+$serverPath=Join-Path $root 'atblse-server.exe'
 $hotspotConfig=Join-Path $data 'hotspot-config.json'
 $hotspotState=Join-Path $data 'hotspot-state.json'
 $hotspotStop=Join-Path $data 'hotspot-stop'
@@ -32,7 +44,7 @@ function Stop-App {
  try {
   if($script:server -and -not $script:server.HasExited){
    Stop-LocalServer $script:server $serverData { [Windows.Forms.Application]::DoEvents(); Start-Sleep -Milliseconds 100 }
-   if($script:server.ExitCode -ne 0){[Windows.Forms.MessageBox]::Show('Сервер завершился с ошибкой. STOP мог быть не подтверждён: проверьте устройство.','ATBL-SE') | Out-Null}
+   if($script:server.ExitCode -ne 0){[Windows.Forms.MessageBox]::Show('Сервер завершился с ошибкой. STOP мог быть не подтверждён: проверьте устройство.','atblse') | Out-Null}
   }
   if($script:hotspot -and -not $script:hotspot.HasExited){[IO.File]::WriteAllText($hotspotStop,'stop');Wait-While {-not $script:hotspot.HasExited} 6;if(-not $script:hotspot.HasExited){throw 'Точка доступа ещё завершает работу.'}}
   $script:server=$null;$script:hotspot=$null;$status.Text='Сервер остановлен';$start.Enabled=$true;$stop.Enabled=$false;$open.Enabled=$false
@@ -43,7 +55,7 @@ function Start-App {
  $start.Enabled=$false;$status.Text='Запуск...';[Windows.Forms.Application]::DoEvents()
  try {
   if($script:cancelStart){throw 'Запуск отменён.'}
-  if(-not (Test-Path -LiteralPath $serverPath)){throw 'Не найден autoblow-server.exe рядом с приложением.'}
+  if(-not (Test-Path -LiteralPath $serverPath)){throw 'Не найден atblse-server.exe рядом с приложением.'}
   $control=@{maxSpeed=15;compatibilityControl=$false;experimentalSyncScripts=$false;experimentalLocalScripts=$false;scriptURLOrigins=@()}
   $controlFile=Join-Path $data 'control-options.json'
   if(Test-Path -LiteralPath $controlFile){
@@ -73,7 +85,7 @@ function Start-App {
   Write-Json $serverConfig $config
   $script:server=Start-Process -FilePath $serverPath -ArgumentList @('--config',('"'+$serverConfig+'"')) -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $data 'server.log') -RedirectStandardError (Join-Path $data 'server-error.log')
   $ready=$false;$end=[DateTime]::UtcNow.AddSeconds(10)
-  while(-not $ready -and -not $script:cancelStart -and -not $script:server.HasExited -and [DateTime]::UtcNow -lt $end){try{$health=Invoke-RestMethod 'http://127.0.0.1:20880/health' -TimeoutSec 1;$ready=$health.version -eq '0.2.0-rc.2'}catch{};if(-not $ready){Start-Sleep -Milliseconds 100};[Windows.Forms.Application]::DoEvents()}
+  while(-not $ready -and -not $script:cancelStart -and -not $script:server.HasExited -and [DateTime]::UtcNow -lt $end){try{$health=Invoke-RestMethod 'http://127.0.0.1:20880/health' -TimeoutSec 1;$ready=$health.version -eq '0.2.0-rc.3'}catch{};if(-not $ready){Start-Sleep -Milliseconds 100};[Windows.Forms.Application]::DoEvents()}
   if($script:cancelStart){throw 'Запуск отменён.'}
   if(-not $ready){$detail=Get-Content -LiteralPath (Join-Path $data 'server-error.log') -Raw -ErrorAction SilentlyContinue;throw ('Не удалось запустить сервер. '+$detail)}
   $token=(Get-Content -LiteralPath (Join-Path $serverData 'control-token') -Raw).Trim();$script:headers=@{Authorization='Bearer '+$token}
@@ -90,9 +102,9 @@ function Start-App {
  }
 }
 
-$form=[Windows.Forms.Form]::new();$form.Text='ATBL-SE';$form.Size=[Drawing.Size]::new(640,650);$form.StartPosition='CenterScreen';$form.Font=[Drawing.Font]::new('Segoe UI',10);$form.FormBorderStyle='FixedDialog';$form.MaximizeBox=$false
+$form=[Windows.Forms.Form]::new();$form.Text='atblse';$form.Size=[Drawing.Size]::new(640,650);$form.StartPosition='CenterScreen';$form.Font=[Drawing.Font]::new('Segoe UI',10);$form.FormBorderStyle='FixedDialog';$form.MaximizeBox=$false
 function Label($text,$y){$c=[Windows.Forms.Label]::new();$c.Text=$text;$c.Location=[Drawing.Point]::new(24,$y);$c.Size=[Drawing.Size]::new(575,28);$form.Controls.Add($c);return $c}
-$title=Label 'ATBL-SE - запуск сервера' 20;$title.Font=[Drawing.Font]::new('Segoe UI',16)
+$title=Label 'atblse - запуск сервера' 20;$title.Font=[Drawing.Font]::new('Segoe UI',16)
 $null=Label 'Способ подключения' 68
 $mode=[Windows.Forms.ComboBox]::new();$mode.Location=[Drawing.Point]::new(24,98);$mode.Width=575;$mode.DropDownStyle='DropDownList';$mode.Items.AddRange(@('Домашняя сеть - роутер настраивается пользователем','Автономная точка доступа Windows (Wi-Fi Direct)'));$mode.SelectedIndex=0;$form.Controls.Add($mode)
 $null=Label 'Сетевой интерфейс для домашней сети' 138
@@ -102,7 +114,7 @@ Startup-Stage 'network list ready'
 foreach($n in $script:networks){$network.Items.Add($n.InterfaceAlias+' - '+$n.IPAddress) | Out-Null};if($network.Items.Count){$network.SelectedIndex=0}
 $dns=[Windows.Forms.CheckBox]::new();$dns.Text='Включить DNS приложения для VacuGlide';$dns.Location=[Drawing.Point]::new(24,208);$dns.Width=575;$form.Controls.Add($dns)
 $null=Label 'Название Wi-Fi для автономного режима' 246
-$ssid=[Windows.Forms.TextBox]::new();$ssid.Location=[Drawing.Point]::new(24,276);$ssid.Width=575;$ssid.Text='Autoblow-Local';$form.Controls.Add($ssid)
+$ssid=[Windows.Forms.TextBox]::new();$ssid.Location=[Drawing.Point]::new(24,276);$ssid.Width=575;$ssid.Text='atblse';$form.Controls.Add($ssid)
 $null=Label 'Пароль Wi-Fi (сохранится только на этом компьютере)' 312
 $password=[Windows.Forms.TextBox]::new();$password.Location=[Drawing.Point]::new(24,342);$password.Width=430;$password.UseSystemPasswordChar=$true;$password.Text=[guid]::NewGuid().ToString('N').Substring(0,16);$form.Controls.Add($password)
 if(Test-Path -LiteralPath $hotspotConfig){try{$saved=Get-Content -LiteralPath $hotspotConfig -Raw | ConvertFrom-Json;$ssid.Text=$saved.ssid;$password.Text=$saved.password}catch{}}
@@ -120,8 +132,8 @@ $firewall.Add_Click({try{
  $p=Start-Process -FilePath powershell.exe -ArgumentList $firewallArgs -Verb RunAs -WindowStyle Hidden -PassThru;$p.WaitForExit()
  if($p.ExitCode -ne 0){throw 'Настройка брандмауэра не выполнена.'};$status.Text='Разрешены только DNS и TLS приложения на выбранном интерфейсе для локальной сети.'
 }catch{$status.Text=$_.Exception.Message}})
-$docs.Add_Click({Start-Process (Join-Path $root 'docs\WINDOWS.md')})
+$docs.Add_Click({Start-Process (Join-Path $root 'docs\ru\windows.md')})
 $form.Add_FormClosing({param($sender,$closingEvent) try{Stop-App}catch{$closingEvent.Cancel=$true;$status.Text=$_.Exception.Message}})
 if($Smoke){$timer=[Windows.Forms.Timer]::new();$timer.Interval=1000;$timer.Add_Tick({$timer.Stop();$form.Close()});$timer.Start()}
 Startup-Stage 'showing form'
-try{[Windows.Forms.Application]::Run($form)}finally{Startup-Stage 'form closed';$mutex.ReleaseMutex();$mutex.Dispose()}
+try{[Windows.Forms.Application]::Run($form)}finally{Startup-Stage 'form closed';$mutex.ReleaseMutex();$mutex.Dispose();$legacyMutex.ReleaseMutex();$legacyMutex.Dispose()}

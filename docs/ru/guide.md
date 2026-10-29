@@ -2,7 +2,7 @@
 
 [English](../en/guide.md) | [README](../../README.ru.md)
 
-Название проекта - ATBL-SE. Пути команд, имена исполняемых файлов и каталог `%LOCALAPPDATA%/AutoblowLocal` сохраняют прежние технические имена для совместимости; переименование проекта не переносит и не удаляет данные.
+Все собственные команды, исполняемые файлы, пакеты и переменные окружения проекта теперь используют `atblse`. Перед заменой старой сборки прочтите [инструкцию миграции и восстановления](migration.md). Имена официальных API, прошивки и стороннего SDK сохранены.
 
 ## Установка и сеть
 
@@ -13,19 +13,19 @@
 Соберите два исполняемых файла и сохраните рядом `windows/`:
 
 ```sh
-GOOS=windows GOARCH=amd64 go build -o out/windows/autoblow-server.exe ./cmd/autoblow-server
-GOOS=windows GOARCH=amd64 go build -ldflags="-H windowsgui" -o out/windows/AutoblowLocal.exe ./cmd/autoblow-windows
+GOOS=windows GOARCH=amd64 go build -o out/windows/atblse-server.exe ./cmd/atblse-server
+GOOS=windows GOARCH=amd64 go build -ldflags="-H windowsgui" -o out/windows/atblse.exe ./cmd/atblse-windows
 ```
 
-Скопируйте `windows/` и `docs/` в `out/windows/`; откройте `AutoblowLocal.exe`. Оболочка использует Windows PowerShell 5.1, .NET Framework и WinRT. Python, WSL и Docker Desktop пользователю не нужны. Выберите автономную точку доступа либо работу через роутер. Для точки доступа нужен адаптер с Wi-Fi Direct; начальная настройка и DHCP/DNS требуют физической приёмки. Подключите устройство к показанной Wi-Fi-сети штатным способом. Для возврата в прежнюю сеть потребуется снова выполнить штатную настройку.
+Скопируйте `windows/` и `docs/` в `out/windows/`; откройте `atblse.exe`. Оболочка использует Windows PowerShell 5.1, .NET Framework и WinRT. Python, WSL и Docker Desktop пользователю не нужны. Выберите автономную точку доступа либо работу через роутер. Для точки доступа нужен адаптер с Wi-Fi Direct; начальная настройка и DHCP/DNS требуют физической приёмки. Подключите устройство к показанной Wi-Fi-сети штатным способом. Для возврата в прежнюю сеть потребуется снова выполнить штатную настройку.
 
-Данные и пароль точки доступа находятся в `%LOCALAPPDATA%/AutoblowLocal`. Не публикуйте этот каталог. Необязательный `control-options.json` использует поля сервера `compatibilityControl`, `experimentalSyncScripts`, `experimentalLocalScripts`, `maxSpeed`, `scriptURLOrigins`. Правьте его при остановленном приложении. При штатной остановке сначала проверяется и завершается собственный сервер, затем точка доступа. Если завершение процесса не подтверждено, оболочка сохраняет соединение и оставляет STOP для восстановления.
+Данные и пароль точки доступа находятся в `%LOCALAPPDATA%/atblse`. Не публикуйте этот каталог. Необязательный `control-options.json` использует поля сервера `compatibilityControl`, `experimentalSyncScripts`, `experimentalLocalScripts`, `maxSpeed`, `scriptURLOrigins`. Правьте его при остановленном приложении. При штатной остановке сначала проверяется и завершается собственный сервер, затем точка доступа. Если завершение процесса не подтверждено, оболочка сохраняет соединение и оставляет STOP для восстановления.
 
 ### Docker на NAS
 
-Соберите Linux-сервер в отдельном контексте с `deploy/Dockerfile` и `/etc/ssl/certs/ca-certificates.crt`, затем образ `atbl-se:0.2.0-rc.2`. В scratch-образе находятся исполняемый файл и доверенные CA. Сохраните его через `docker save` и перенесите архив для автономного `docker load`.
+Соберите Linux-сервер в отдельном контексте с `deploy/Dockerfile` и `/etc/ssl/certs/ca-certificates.crt`, затем образ `atblse:0.2.0-rc.3`. В scratch-образе находятся исполняемый файл и доверенные CA. Сохраните его через `docker save` и перенесите архив для автономного `docker load`.
 
-Задайте `AUTOBLOW_DATA_DIR` и `AUTOBLOW_CONFIG_DIR` как приватные абсолютные пути. Скопируйте во второй каталог `deploy/server.example.json` с именем `server.json`. UID/GID 65532 нужны запись в данные и чтение конфигурации. `deploy/compose.yaml` задаёт `pull_policy: never`, `restart: no`, read-only корень, 96 MiB и отсутствие дополнительных capabilities. Порт TLS хоста 20445 соответствует 20443 контейнера, API 20881 - 20880. Публикация репозитория ничего не устанавливает и не запускает на NAS.
+Задайте `ATBLSE_DATA_DIR` и `ATBLSE_CONFIG_DIR` как приватные абсолютные пути. Скопируйте во второй каталог `deploy/server.example.json` с именем `server.json`. UID/GID 65532 нужны запись в данные и чтение конфигурации. `deploy/compose.yaml` задаёт `pull_policy: never`, `restart: no`, read-only корень, 96 MiB и отсутствие дополнительных capabilities. Порт TLS хоста 20445 соответствует 20443 контейнера, API 20881 - 20880. Публикация репозитория ничего не устанавливает и не запускает на NAS.
 
 ### Варианты DNS и роутера
 
@@ -61,7 +61,7 @@ GOOS=windows GOARCH=amd64 go build -ldflags="-H windowsgui" -o out/windows/Autob
 
 ## Инструменты разработки
 
-- `cmd/vacuglide-simulator`: WSS-клиент только для loopback, с проверкой TLS, синтетическим MAC и ограничением загрузок. `--lab --duration 10m` создаёт отдельный стенд. Для своего локального сервера: `--url wss://127.0.0.1:20443/device-backend/ws --ca local-server.crt`. Режима отключения TLS, внешнего сервера и реальных учётных данных не требуется.
+- `cmd/atblse-simulator`: WSS-клиент только для loopback, с проверкой TLS, синтетическим MAC и ограничением загрузок. `--lab --duration 10m` создаёт отдельный стенд. Для своего локального сервера: `--url wss://127.0.0.1:20443/device-backend/ws --ca local-server.crt`. Режима отключения TLS, внешнего сервера и реальных учётных данных не требуется.
 - `internal/simulator`: модель ручных команд, клапанов, local/sync и слотов. Она сообщает запрошенное состояние, не воспроизводит сценарий по реальному времени, мотор, flash или OTA. `research/vacuglide_tick_model.py` отдельно моделирует время автономно.
 - `research/vacuglide_binary.py`: декодирование/кодирование без потерь и кандидат преобразования Funscript. Пример: `python research/vacuglide_binary.py decode input.bin output.json --csv analysis.csv`. Выходные файлы не должны существовать.
 - `research/inspect_esp_image.py` и `research/ghidra/`: ограниченный статический анализ образа и экспорт из Ghidra. Образ предоставляет оператор; прошивка не записывается и не входит в репозиторий.
@@ -79,9 +79,11 @@ python scripts/test_package_release.py -v
 node scripts/panel-contracts.mjs
 python scripts/prepare-client-contracts.py
 npm ci --prefix out/clients-integration --ignore-scripts --no-audit --no-fund
-AUTOBLOW_TEST_NODE=$(command -v node) AUTOBLOW_TEST_CLIENTS="$PWD/out/clients-integration" go test -race -tags integration ./core
+ATBLSE_TEST_NODE=$(command -v node) ATBLSE_TEST_CLIENTS="$PWD/out/clients-integration" go test -race -tags integration ./core
 ```
 
 Node 24.18.0 поддерживает TypeScript-адаптер стенда; SDK 2.6.0 зафиксирован lock-файлом. Снимок адаптера - тестовая фикстура совместимости; установленная Studio проверяется отдельно. Для получения зависимостей нужен интернет либо заполненный кеш, сами тесты и готовый сервер работают автономно.
 
 Перед коммитом запускайте `node .standards/check.mjs staged`. Владелец использует отдельный build-хост для тяжёлых операций; публичные PR нельзя автоматически исполнять на приватном runner. GitHub-задача `repository-standard` проверяет инструменты с правами только чтения. Статус `software-verification` относится к точному исходнику, проверенному на изолированном build-хосте; физическая приёмка учитывается отдельно.
+
+Дополнительные проверки исходников: `node scripts/check-project.mjs` сверяет версии и ссылки; `node scripts/test-standard-adoption.mjs` проверяет закреплённый checker во временном репозитории, включая отказ при синтетическом секрете. Изолированные Windows-проверки: `powershell.exe -NoProfile -File scripts/test-state-migration.ps1` и `powershell.exe -NoProfile -File scripts/test-server-lifecycle.ps1`. Они используют временные данные и моки, не запускают точку доступа и не обращаются к устройству.

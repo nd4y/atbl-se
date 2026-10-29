@@ -65,6 +65,11 @@ button:disabled {
   opacity: 0.35;
   cursor: default;
 }
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
 .actions {
   display: flex;
   gap: 12px;
