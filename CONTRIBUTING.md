@@ -2,8 +2,10 @@
 
 [Русский](CONTRIBUTING.ru.md)
 
-Use a feature branch and a pull request. The owner performs merge. Read AGENTS.md and the pinned repository policy. Update both README files and relevant English/Russian documentation in the same PR. Keep changes scoped and preserve existing authorship/notices.
+Use a feature branch and a pull request. The owner merges after required checks. Read [repository instructions](AGENTS.md), [.repo-policy.json](.repo-policy.json) and the pinned [development standard](docs/en/development-standard.md). Keep both READMEs and relevant English/Russian pages current in the same change. Preserve existing authorship and third-party notices.
 
-Bootstrap the checker with `npm ci --prefix .standards --ignore-scripts --no-audit --no-fund`, then `node .standards/install-gitleaks.mjs` and `node .standards/install-hooks.mjs`. The hook preserves prior hooks and checks staged content without restaging. Run `node .standards/check.mjs structure` and `node .standards/check.mjs staged`. Use the pinned Prettier settings in `.standards/format.json` and gofmt for Go.
+Follow [development commands](docs/en/development.md) for dependencies, checks and tools. Install the pinned hooks before committing; they check staged content without restaging and preserve previous hooks. Use Go's formatter and the pinned Prettier configuration. Missing secret scanning blocks publication.
 
-Run the commands in docs/en/guide.md on isolated infrastructure. Do not connect to the official service, alter a network or use a real device as part of routine tests. Never execute an untrusted public PR on a private runner. Publish exact-source software evidence as the `software-verification` status after the reviewer's build; keep physical gates separate.
+Run builds and full tests on isolated infrastructure. Routine tests use synthetic inputs and a loopback device; they do not access the official service, change networking or operate hardware. Never execute untrusted public PR code automatically on a private runner. Keep credentials, private state, captures, firmware images and vendor media outside Git.
+
+Tie the `software-verification` status to the exact reviewed source and evidence. Report test scope and limitations; separate source checks from installation, physical acceptance and release. [Verification](docs/en/verification.md) lists the open gates. Do not claim product-wide licensing rights that have not been granted.

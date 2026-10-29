@@ -1,46 +1,47 @@
 # atblse
 
-**Autoblow Server Emulator**
-
 [Русский](README.ru.md)
 
-![An isolated local server and a virtual VacuGlide device](docs/assets/preview.svg)
+![Local server and virtual VacuGlide device](docs/assets/preview.svg)
 
-Run a stock VacuGlide 2 through a local server, with a diagnostic panel and an API for clients such as VacuGlide Studio.
+**atblse - Autoblow Server Emulator** runs a stock VacuGlide 2 through a local server. It provides a diagnostic web panel and a compatible control API for applications such as VacuGlide Studio.
 
-- The built server starts and operates without internet access or a cloud account.
-- Portable Go core, optional Windows hotspot wrapper, and a NAS Docker configuration with automatic restart disabled.
-- Manual speed and valves, 30 local slots, Funscript/CSV conversion, script transfer, seeking, looping and events.
-- A standalone virtual device and an isolated loopback lab for development without hardware.
+- Operates without internet access or a cloud account once the application and configuration are available locally.
+- Controls speed, both valves, 30 device slots and synchronized Funscript/CSV playback.
+- Runs as a Go server, through a Windows launcher, or in a NAS Docker container with automatic restart disabled.
+- Includes a virtual device for development without hardware.
 
-**Candidate 0.2.0-rc.3.** The firmware profile is VacuGlide 2 `1.03`/`1.0.3`. Software tests are separate from physical acceptance. This candidate still needs real-device, Windows Hotspot and network/power-loss acceptance. AI Ultra, cloud accounts, video services and firmware updates are outside this product.
+The current source version is **0.2.0-rc.3**, an experimental candidate for VacuGlide 2 firmware **1.03 / 1.0.3**. Physical acceptance of this Go implementation and Windows Hotspot remains open. AI Ultra and firmware updates are outside the supported profile.
 
-The `atblse` rename includes executable names, the Go module and `ATBLSE_*` configuration variables. The Windows launcher copies existing data without deleting the old directory. Follow [migration and key recovery](docs/en/migration.md); the [standard review](docs/en/review-2026-10-29.md) separates software evidence from remaining release gates.
+## Try it without a device
 
-## Try the local lab
-
-With Go 1.24 or later (verification uses Go 1.27.3):
+From the repository root, with Go 1.24 or later:
 
 ```sh
 go build -o out/atblse-simulator ./cmd/atblse-simulator
 ./out/atblse-simulator --lab --duration 10m
 ```
 
-On Windows, build with `-o out/atblse-simulator.exe` and run that file. The command prints a temporary panel URL, local control key and synthetic MAC. Open the URL, enter the key, and pair the displayed virtual device. Nothing is sent to the official service. The lab removes its temporary state when it exits normally.
+On Windows, use `-o out/atblse-simulator.exe` and run that file. The program prints JSON with `api`, `controlToken` and `pairMAC`. Open `api` in a browser, enter the key and pair the displayed virtual device. The lab uses temporary data and exits after ten minutes. Its TLS certificate is verified; no official service or physical device is involved.
 
-Development dependencies must be obtained before an offline build. The compiled application does not download them at startup. The current panel and Windows shell use Russian labels.
+A source build needs downloaded dependencies or a prepared cache. The built application does not download dependencies at startup. The web panel and Windows launcher currently use Russian labels.
 
-## Use the server
+## Connect a device or application
 
-Build `./cmd/atblse-server`, prepare a private configuration from `deploy/server.example.json`, and follow the [installation and API guide](docs/en/guide.md). Keep the API private. The default maximum speed is 15%; script playback and external-client control need explicit configuration.
+Choose [Windows](docs/en/windows.md) or the [standalone server / NAS guide](docs/en/guide.md). Configure the local network, connect the device and confirm pairing in the panel. For an external application, set the local server address and control key, then explicitly enable the required API features.
 
-The diagnostic panel uses a renewable session. External API clients own their STOP behavior. Disconnecting the server cannot prove a motor has physically stopped, and the server never resumes a previous run automatically.
+The default maximum speed is 15%. Script features are disabled by default. The panel uses a renewable control session; external applications manage their own STOP behavior. Firmware acknowledgement of STOP is not a physical sensor reading.
 
-- [Windows, NAS and router/DNS setup](docs/en/guide.md#installation-and-network)
-- [API, protocol and valve semantics](docs/en/guide.md#api-and-protocol)
-- [Simulator, offline codec and research tools](docs/en/guide.md#developer-tools)
-- [Project passport and acceptance](docs/en/project.md)
-- [Contributing](CONTRIBUTING.md), [security reporting](SECURITY.md), [repository standard](docs/en/development-standard.md)
-- [Releases](https://github.com/nd4y/atblse/releases) and [issues](https://github.com/nd4y/atblse/issues)
+## Documentation
 
-No project-wide open-source license has been selected; see [LICENSE.md](LICENSE.md) and [third-party notices](THIRD_PARTY_NOTICES.md). No firmware images, video-library collection, account/session captures or production credentials are distributed here.
+- [Installation and router/DNS options](docs/en/guide.md)
+- [Windows launcher](docs/en/windows.md)
+- [Configuration reference](docs/en/configuration.md)
+- [API, scripts and valves](docs/en/api.md)
+- [Data, backup and key recovery](docs/en/data.md)
+- [Development and verification commands](docs/en/development.md)
+- [Architecture and scope](docs/en/project.md), [verification status](docs/en/verification.md)
+- [Contributing](CONTRIBUTING.md), [security](SECURITY.md), [development standard](docs/en/development-standard.md)
+- [Releases](https://github.com/nd4y/atblse/releases), [issues](https://github.com/nd4y/atblse/issues)
+
+No stable release or project-wide open-source license is declared. See [LICENSE.md](LICENSE.md) and [third-party notices](THIRD_PARTY_NOTICES.md). The repository contains no device credentials, session captures, firmware images or video-library collection.
