@@ -30,7 +30,7 @@ A source build needs downloaded dependencies or a prepared cache. The built appl
 
 Choose [Windows](docs/en/windows.md) or the [standalone server / NAS guide](docs/en/guide.md). Configure the local network, connect the device and confirm pairing in the panel. For an external application, set the local server address and control key, then explicitly enable the required API features.
 
-The default maximum speed is 15%. Script features are disabled by default. The panel uses a renewable control session; external applications manage their own STOP behavior. Firmware acknowledgement of STOP is not a physical sensor reading.
+The standalone server and Windows launcher default to a maximum speed of 15%, with script features disabled. The synthetic lab enables script features and uses a 100% limit for virtual tests. The panel uses a renewable control session; external applications manage their own STOP behavior. Firmware acknowledgement of STOP is not a physical sensor reading.
 
 ## Documentation
 

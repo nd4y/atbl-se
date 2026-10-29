@@ -2,7 +2,7 @@
 
 [Русский](../ru/configuration.md) | [Installation](guide.md)
 
-Pass JSON with `atblse-server --config server.json`. Unknown fields and trailing JSON are rejected. Values below are the standalone defaults when fields are omitted; the NAS example and Windows launcher explicitly override listener addresses and data paths.
+Pass JSON with `atblse-server --config server.json`. Unknown fields and trailing JSON are rejected. Values below are the standalone defaults when fields are omitted; the NAS example and Windows launcher explicitly override listener addresses and data paths. The simulator's isolated `--lab` mode enables compatible control and both script features, sets `maxSpeed` to 100 and uses temporary data with random loopback ports.
 
 | JSON field                 | Default           | Meaning                                                             |
 | -------------------------- | ----------------- | ------------------------------------------------------------------- |
